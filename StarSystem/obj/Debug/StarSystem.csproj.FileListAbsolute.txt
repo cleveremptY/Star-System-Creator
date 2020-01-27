@@ -1,0 +1,15 @@
+D:\VSProjects\StarSystem\StarSystem\bin\Debug\StarSystem.exe.config
+D:\VSProjects\StarSystem\StarSystem\bin\Debug\StarSystem.exe
+D:\VSProjects\StarSystem\StarSystem\bin\Debug\StarSystem.pdb
+D:\VSProjects\StarSystem\StarSystem\obj\Debug\StarSystem.csprojAssemblyReference.cache
+D:\VSProjects\StarSystem\StarSystem\obj\Debug\MainWindow.g.cs
+D:\VSProjects\StarSystem\StarSystem\obj\Debug\App.g.cs
+D:\VSProjects\StarSystem\StarSystem\obj\Debug\StarSystem_MarkupCompile.cache
+D:\VSProjects\StarSystem\StarSystem\obj\Debug\StarSystem_MarkupCompile.lref
+D:\VSProjects\StarSystem\StarSystem\obj\Debug\MainWindow.baml
+D:\VSProjects\StarSystem\StarSystem\obj\Debug\StarSystem.g.resources
+D:\VSProjects\StarSystem\StarSystem\obj\Debug\StarSystem.Properties.Resources.resources
+D:\VSProjects\StarSystem\StarSystem\obj\Debug\StarSystem.csproj.GenerateResource.cache
+D:\VSProjects\StarSystem\StarSystem\obj\Debug\StarSystem.csproj.CoreCompileInputs.cache
+D:\VSProjects\StarSystem\StarSystem\obj\Debug\StarSystem.exe
+D:\VSProjects\StarSystem\StarSystem\obj\Debug\StarSystem.pdb
