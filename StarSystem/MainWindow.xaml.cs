@@ -20,50 +20,24 @@ namespace StarSystem
     /// </summary>
     public partial class MainWindow : Window
     {
-        SpaceObject selectedObject;
+        StarPlanetSystem MainSystem;
+
+        private Position SystemCenter {
+            get
+            {
+                return new Position(SpaceCanvas.ActualWidth / 2, SpaceCanvas.ActualHeight / 2);
+            }
+        }
 
         public MainWindow()
         {
             InitializeComponent();
-            
-        }
-
-        public Ellipse Draw(SpaceObject spaceObject)
-        {
-            Ellipse spaceEllipse = new Ellipse();
-            spaceEllipse.Width = spaceEllipse.Height = spaceObject.Radius * 2;
-            spaceEllipse.VerticalAlignment = VerticalAlignment.Top;
-            spaceEllipse.Fill = spaceEllipse.Stroke = new SolidColorBrush(spaceObject.ObjectColor);
-            spaceEllipse.StrokeThickness = 1.5;
-            SetPositon(spaceObject, spaceEllipse);
-            spaceEllipse.MouseEnter += SpaceObject_MouseEnter;
-            spaceEllipse.MouseLeave += SpaceObject_MouseLeave;
-            return spaceEllipse;
-        }
-
-        private void SetPositon(SpaceObject spaceObject, Ellipse spaceEllipse)
-        {
-            double left = (SpaceCanvas.ActualWidth - spaceEllipse.ActualWidth) / 2 + spaceObject.ObjectPosition.X;
-            Canvas.SetLeft(spaceEllipse, left);
-            double top = (SpaceCanvas.ActualHeight - spaceEllipse.ActualHeight) / 2 + spaceObject.ObjectPosition.Y;
-            Canvas.SetTop(spaceEllipse, top);
-        }
-
-        private void SpaceObject_MouseEnter(object sender, RoutedEventArgs e)
-        {
-            ((Ellipse)sender).Stroke = Brushes.Red;
-        }
-
-        private void SpaceObject_MouseLeave(object sender, RoutedEventArgs e)
-        {
-            ((Ellipse)sender).Stroke = ((Ellipse)sender).Fill;
+            MainSystem = new StarPlanetSystem(SystemCenter);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Star mainStar = new Star("Солнце", 20, StarTypes.Yellow);
-            selectedObject = mainStar;
-            SpaceCanvas.Children.Add(Draw(mainStar));
+            SpaceCanvas.Children.Add(MainSystem.MainStar.Draw());
         }
     }
 }

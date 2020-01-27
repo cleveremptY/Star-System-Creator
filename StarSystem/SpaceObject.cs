@@ -12,10 +12,6 @@ namespace StarSystem
 {
     public abstract class SpaceObject
     {
-
-        private int x;
-        private int y;
-
         public string Name { get; set; }
         public int Radius { get; set; }
         public Color ObjectColor { get; set; }

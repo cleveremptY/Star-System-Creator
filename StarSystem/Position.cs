@@ -8,17 +8,17 @@ namespace StarSystem
 {
     public struct Position
     {
-        private int x;
-        private int y;
+        private double x;
+        private double y;
 
-        public int X
+        public double X
         {
             get
             {
                 return x;
             }
         }
-        public int Y
+        public double Y
         {
             get
             {
@@ -26,13 +26,13 @@ namespace StarSystem
             }
         }
 
-        public Position(int x, int y)
+        public Position(double x, double y)
         {
             this.x = this.y = 0;
             Set(x, y);
         }
 
-        public void Set(int x, int y)
+        public void Set(double x, double y)
         {
             this.x = x;
             this.y = y;
