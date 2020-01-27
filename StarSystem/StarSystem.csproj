@@ -55,9 +55,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Planet.cs" />
     <Compile Include="Position.cs" />
     <Compile Include="SpaceObject.cs" />
     <Compile Include="Star.cs" />
+    <Compile Include="StarSystemInfo.cs" />
     <Compile Include="StarTypes.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

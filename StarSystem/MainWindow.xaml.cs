@@ -33,9 +33,8 @@ namespace StarSystem
             Ellipse spaceEllipse = new Ellipse();
             spaceEllipse.Width = spaceEllipse.Height = spaceObject.Radius * 2;
             spaceEllipse.VerticalAlignment = VerticalAlignment.Top;
-            spaceEllipse.Fill = Brushes.Yellow;
-            spaceEllipse.Stroke = Brushes.Yellow;
-            spaceEllipse.StrokeThickness = 1;
+            spaceEllipse.Fill = spaceEllipse.Stroke = new SolidColorBrush(spaceObject.ObjectColor);
+            spaceEllipse.StrokeThickness = 1.5;
             SetPositon(spaceObject, spaceEllipse);
             spaceEllipse.MouseEnter += SpaceObject_MouseEnter;
             spaceEllipse.MouseLeave += SpaceObject_MouseLeave;
