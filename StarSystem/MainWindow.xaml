@@ -17,13 +17,13 @@
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="30px"></RowDefinition>
         </Grid.RowDefinitions>
-        <Canvas x:Name ="SpaceCanvas"  Background="Black" MouseDown="SpaceCanvas_MouseDown">
+        <Canvas x:Name ="SpaceCanvas"  Background="Black" MouseDown="SpaceCanvas_MouseDown" ClipToBounds="True">
             
         </Canvas>
         <GridSplitter Grid.Column="1" ShowsPreview="False" Width="3"
         HorizontalAlignment="Center" VerticalAlignment="Stretch" />
         <StackPanel Grid.Column="2" Margin="5px">
-            <Canvas x:Name ="SpaceObjectView" Height="150px" Margin="5px" Background="Black">
+            <Canvas x:Name ="SpaceObjectView" Height="150px" Margin="5px" Background="Black" ClipToBounds="True">
 
             </Canvas>
             <Button  Content="Добавить тело на орбиту" Click="Button_Click" />

@@ -20,7 +20,9 @@ namespace StarSystem
     /// </summary>
     public partial class MainWindow : Window
     {
-        StarPlanetSystem MainSystem;
+        private bool isPlanetCreate;
+        private Planet createPlanet;
+        private StarPlanetSystem MainSystem;
 
         public MainWindow()
         {
@@ -29,14 +31,29 @@ namespace StarSystem
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            SpaceCanvas.Children.Add(MainSystem.MainStar.Draw());
+            Random rand = new Random();
+
+            isPlanetCreate = true;
+            string basePlanetName = MainSystem.MainStar.BaseSpaceObject.Name + "-" + (MainSystem.Planets.Count + 1);
+            Color basePlanetColor = Color.FromRgb(0, 255, 0);
+            createPlanet = new Planet(basePlanetName, StarSystemParams.selectedSpaceObject, basePlanetColor);
+            MainSystem.Planets.Add(new SpaceObjectCanvasAdapter(createPlanet));
+            Ellipse ellipsePlanet = MainSystem.Planets[MainSystem.Planets.Count - 1].DrawFunctional();
+            ellipsePlanet.Fill = ellipsePlanet.Stroke = new SolidColorBrush(basePlanetColor);
+            SpaceCanvas.Children.Add(ellipsePlanet);
+
+            StarSystemParams.selectedSpaceObject = MainSystem.Planets[MainSystem.Planets.Count - 1].BaseSpaceObject;
+            PrintSelectedSpaceObjectInfo();
+
+            MessageBox.Show(MainSystem.Planets[MainSystem.Planets.Count - 1].BaseSpaceObject.Name + "\n" +
+                MainSystem.Planets[MainSystem.Planets.Count - 1].BaseSpaceObject.ObjectPosition);
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             MainSystem = new StarPlanetSystem();
             StarSystemParams.SystemCenter = new Position(SpaceCanvas.ActualWidth / 2, SpaceCanvas.ActualHeight / 2);
-            SpaceCanvas.Children.Add(MainSystem.MainStar.Draw());
+            SpaceCanvas.Children.Add(MainSystem.MainStar.DrawFunctional());
 
             StarSystemParams.selectedSpaceObject = MainSystem.MainStar.BaseSpaceObject;
             PrintSelectedSpaceObjectInfo();
@@ -44,12 +61,21 @@ namespace StarSystem
 
         private void SpaceCanvas_MouseDown(object sender, MouseButtonEventArgs e)
         {
+            SpaceObjectView.Children.Clear();
             PrintSelectedSpaceObjectInfo();
         }
 
         private void PrintSelectedSpaceObjectInfo()
         {
             SpaceObjectName.Text = StarSystemParams.selectedSpaceObject.Name;
+            Ellipse viewPlanet = MainSystem.FindSpaceObject(StarSystemParams.selectedSpaceObject.Name).Draw(2);
+
+            double left = (SpaceObjectView.ActualWidth - viewPlanet.Width) / 2;
+            Canvas.SetLeft(viewPlanet, left);
+            double top = (SpaceObjectView.ActualHeight - viewPlanet.Height) / 2;
+            Canvas.SetTop(viewPlanet, top);
+
+            SpaceObjectView.Children.Add(viewPlanet);
         }
     }
 }

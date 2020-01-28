@@ -13,11 +13,12 @@ namespace StarSystem
 
         public SpaceObject OrbitBase { get; }
         public int OrbitRadius { get; set; }
-        public Planet(string name, SpaceObject orbitBase, Color planetColor, int radius = 10, int orbitRadius = 10)
+        public Planet(string name, SpaceObject orbitBase, Color planetColor, int radius = 10, int orbitRadius = 40)
         : base(name, radius, objectColor:planetColor)
         {
             this.orbitBase = orbitBase;
             OrbitRadius = orbitRadius;
+            base.ObjectPosition = new Position(orbitBase.ObjectPosition.X + OrbitRadius, orbitBase.ObjectPosition.Y + OrbitRadius);
         }
     }
 }

@@ -27,15 +27,22 @@ namespace StarSystem
             baseSpaceObject = spaceObject;
         }
 
-        public Ellipse Draw()
+        public Ellipse DrawFunctional(double resizeParam = 1)
+        {
+            Ellipse spaceEllipse = Draw(resizeParam);
+            spaceEllipse.StrokeThickness = 1.5;
+            SetPositonCenter(spaceEllipse);
+            SetActions(spaceEllipse);
+            return spaceEllipse;
+        }
+
+        public Ellipse Draw(double resizeParam = 1)
         {
             Ellipse spaceEllipse = new Ellipse();
-            spaceEllipse.Width = spaceEllipse.Height = BaseSpaceObject.Radius * 2;
+            spaceEllipse.Width = spaceEllipse.Height = BaseSpaceObject.Radius * 2 * resizeParam;
             spaceEllipse.VerticalAlignment = VerticalAlignment.Top;
             spaceEllipse.Fill = spaceEllipse.Stroke = new SolidColorBrush(BaseSpaceObject.ObjectColor);
             spaceEllipse.StrokeThickness = 1.5;
-            SetPositon(spaceEllipse);
-            SetActions(spaceEllipse);
             return spaceEllipse;
         }
 
@@ -48,12 +55,20 @@ namespace StarSystem
                 spaceEllipse.MouseDown += Star_MouseDown;
         }
 
-        //Установка позиции относительно центра канваса
-        protected void SetPositon(Ellipse spaceEllipse)
+        protected void SetPositonCenter(Ellipse spaceEllipse)
         {
-            double left = StarSystemParams.SystemCenter.X - spaceEllipse.ActualWidth / 2 + BaseSpaceObject.ObjectPosition.X;
+            //double left = StarSystemParams.SystemCenter.X - spaceEllipse.ActualWidth / 2 + BaseSpaceObject.ObjectPosition.X;
+            //Canvas.SetLeft(spaceEllipse, left);
+            //double top = StarSystemParams.SystemCenter.Y - spaceEllipse.ActualHeight / 2 + BaseSpaceObject.ObjectPosition.Y;
+            //Canvas.SetTop(spaceEllipse, top);
+            SetPositonCenter(spaceEllipse, StarSystemParams.SystemCenter);
+        }
+
+        protected void SetPositonCenter(Ellipse spaceEllipse, Position canvasCenter)
+        {
+            double left = canvasCenter.X - spaceEllipse.Width / 2 + BaseSpaceObject.ObjectPosition.X;
             Canvas.SetLeft(spaceEllipse, left);
-            double top = StarSystemParams.SystemCenter.Y - spaceEllipse.ActualHeight / 2 + BaseSpaceObject.ObjectPosition.Y;
+            double top = canvasCenter.Y - spaceEllipse.Height / 2 + BaseSpaceObject.ObjectPosition.Y;
             Canvas.SetTop(spaceEllipse, top);
         }
 

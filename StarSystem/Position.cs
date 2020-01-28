@@ -37,5 +37,10 @@ namespace StarSystem
             this.x = x;
             this.y = y;
         }
+
+        public override string ToString()
+        {
+            return x.ToString() + " " + y.ToString();
+        }
     }
 }

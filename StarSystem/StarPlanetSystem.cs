@@ -13,13 +13,19 @@ namespace StarSystem
 
         public StarPlanetSystem()
         {
+            Planets = new List<SpaceObjectCanvasAdapter>();
+
             MainStar = new SpaceObjectCanvasAdapter(new Star("Солнце", 20, StarTypes.Yellow));
-            MainStar.Draw();
         }
 
-        public void AddPlanet()
+        public SpaceObjectCanvasAdapter FindSpaceObject(string name)
         {
-
+            if (MainStar.BaseSpaceObject.Name == name)
+                return MainStar;
+            foreach (var planet in Planets)
+                if (planet.BaseSpaceObject.Name == name)
+                    return planet;
+            return null;
         }
     }
 }
