@@ -11,11 +11,9 @@ namespace StarSystem
         public SpaceObjectCanvasAdapter MainStar { get; set; }
         public List<SpaceObjectCanvasAdapter> Planets { get; }
 
-        public Position SystemCenter;
-
-        public StarPlanetSystem(Position SystemCenter)
+        public StarPlanetSystem()
         {
-            MainStar = new SpaceObjectCanvasAdapter(new Star("Солнце", 20, StarTypes.Yellow), SystemCenter);
+            MainStar = new SpaceObjectCanvasAdapter(new Star("Солнце", 20, StarTypes.Yellow));
             MainStar.Draw();
         }
 

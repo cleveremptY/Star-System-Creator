@@ -22,21 +22,20 @@ namespace StarSystem
     {
         StarPlanetSystem MainSystem;
 
-        private Position SystemCenter {
-            get
-            {
-                return new Position(SpaceCanvas.ActualWidth / 2, SpaceCanvas.ActualHeight / 2);
-            }
-        }
-
         public MainWindow()
         {
             InitializeComponent();
-            MainSystem = new StarPlanetSystem(SystemCenter);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            SpaceCanvas.Children.Add(MainSystem.MainStar.Draw());
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            MainSystem = new StarPlanetSystem();
+            StarSystemParams.SystemCenter = new Position(SpaceCanvas.ActualWidth / 2, SpaceCanvas.ActualHeight / 2);
             SpaceCanvas.Children.Add(MainSystem.MainStar.Draw());
         }
     }

@@ -61,6 +61,7 @@
     <Compile Include="SpaceObjectCanvasAdapter.cs" />
     <Compile Include="Star.cs" />
     <Compile Include="StarPlanetSystem.cs" />
+    <Compile Include="StarSystemParams.cs" />
     <Compile Include="StarTypes.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

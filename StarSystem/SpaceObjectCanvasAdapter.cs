@@ -20,12 +20,10 @@ namespace StarSystem
                 return baseSpaceObject;
             }
         }
-        public Position SystemCenter { get; set; }
 
-        public SpaceObjectCanvasAdapter(SpaceObject spaceObject, Position systemCenter = new Position())
+        public SpaceObjectCanvasAdapter(SpaceObject spaceObject)
         {
             baseSpaceObject = spaceObject;
-            SystemCenter = systemCenter;
         }
 
         public Ellipse Draw()
@@ -44,9 +42,9 @@ namespace StarSystem
         //Установка позиции относительно центра канваса
         private void SetPositon(Ellipse spaceEllipse)
         {
-            double left = SystemCenter.X - spaceEllipse.ActualWidth / 2 + BaseSpaceObject.ObjectPosition.X;
+            double left = StarSystemParams.SystemCenter.X - spaceEllipse.ActualWidth / 2 + BaseSpaceObject.ObjectPosition.X;
             Canvas.SetLeft(spaceEllipse, left);
-            double top = SystemCenter.Y - spaceEllipse.ActualHeight / 2 + BaseSpaceObject.ObjectPosition.Y;
+            double top = StarSystemParams.SystemCenter.Y - spaceEllipse.ActualHeight / 2 + BaseSpaceObject.ObjectPosition.Y;
             Canvas.SetTop(spaceEllipse, top);
         }
 
