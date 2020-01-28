@@ -35,15 +35,16 @@ namespace StarSystem
 
             isPlanetCreate = true;
             string basePlanetName = MainSystem.MainStar.BaseSpaceObject.Name + "-" + (MainSystem.Planets.Count + 1);
-            Color basePlanetColor = Color.FromRgb(0, 255, 0);
+            Color basePlanetColor = Color.FromRgb(Convert.ToByte(rand.Next(256)),
+                Convert.ToByte(rand.Next(256)),
+                Convert.ToByte(rand.Next(256)));
             createPlanet = new Planet(basePlanetName, StarSystemParams.selectedSpaceObject, basePlanetColor);
             MainSystem.Planets.Add(new SpaceObjectCanvasAdapter(createPlanet));
             Ellipse ellipsePlanet = MainSystem.Planets[MainSystem.Planets.Count - 1].DrawFunctional();
-            ellipsePlanet.Fill = ellipsePlanet.Stroke = new SolidColorBrush(basePlanetColor);
             SpaceCanvas.Children.Add(ellipsePlanet);
 
-            StarSystemParams.selectedSpaceObject = MainSystem.Planets[MainSystem.Planets.Count - 1].BaseSpaceObject;
-            PrintSelectedSpaceObjectInfo();
+            //StarSystemParams.selectedSpaceObject = MainSystem.Planets[MainSystem.Planets.Count - 1].BaseSpaceObject;
+            //PrintSelectedSpaceObjectInfo();
 
             MessageBox.Show(MainSystem.Planets[MainSystem.Planets.Count - 1].BaseSpaceObject.Name + "\n" +
                 MainSystem.Planets[MainSystem.Planets.Count - 1].BaseSpaceObject.ObjectPosition);
@@ -69,7 +70,7 @@ namespace StarSystem
         {
             SpaceObjectName.Text = StarSystemParams.selectedSpaceObject.Name;
             Ellipse viewPlanet = MainSystem.FindSpaceObject(StarSystemParams.selectedSpaceObject.Name).Draw(2);
-
+            
             double left = (SpaceObjectView.ActualWidth - viewPlanet.Width) / 2;
             Canvas.SetLeft(viewPlanet, left);
             double top = (SpaceObjectView.ActualHeight - viewPlanet.Height) / 2;

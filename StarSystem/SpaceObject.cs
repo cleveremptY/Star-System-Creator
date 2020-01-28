@@ -22,6 +22,7 @@ namespace StarSystem
             Name = name;
             Radius = radius;
             ObjectPosition = position;
+            ObjectColor = objectColor;
         }
     }
 }
