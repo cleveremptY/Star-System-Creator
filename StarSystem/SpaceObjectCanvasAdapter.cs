@@ -49,7 +49,7 @@ namespace StarSystem
         }
 
         //Установка позиции относительно центра канваса
-        private void SetPositon(Ellipse spaceEllipse)
+        protected void SetPositon(Ellipse spaceEllipse)
         {
             double left = StarSystemParams.SystemCenter.X - spaceEllipse.ActualWidth / 2 + BaseSpaceObject.ObjectPosition.X;
             Canvas.SetLeft(spaceEllipse, left);
@@ -73,11 +73,12 @@ namespace StarSystem
         {
             isPressed = true;
             ((Ellipse)sender).Stroke = Brushes.Red;
+            StarSystemParams.selectedSpaceObject = baseSpaceObject;
         }
 
         private void Star_MouseDown(object sender, RoutedEventArgs e)
         {
-            ((Ellipse)sender).Stroke = Brushes.Red;
+            //((Ellipse)sender).Stroke = Brushes.Red;
         }
     }
 }

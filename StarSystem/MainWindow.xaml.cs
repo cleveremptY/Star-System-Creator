@@ -37,6 +37,19 @@ namespace StarSystem
             MainSystem = new StarPlanetSystem();
             StarSystemParams.SystemCenter = new Position(SpaceCanvas.ActualWidth / 2, SpaceCanvas.ActualHeight / 2);
             SpaceCanvas.Children.Add(MainSystem.MainStar.Draw());
+
+            StarSystemParams.selectedSpaceObject = MainSystem.MainStar.BaseSpaceObject;
+            PrintSelectedSpaceObjectInfo();
+        }
+
+        private void SpaceCanvas_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            PrintSelectedSpaceObjectInfo();
+        }
+
+        private void PrintSelectedSpaceObjectInfo()
+        {
+            SpaceObjectName.Text = StarSystemParams.selectedSpaceObject.Name;
         }
     }
 }

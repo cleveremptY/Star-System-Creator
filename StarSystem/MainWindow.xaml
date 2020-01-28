@@ -5,18 +5,36 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:StarSystem"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" Loaded="Window_Loaded">
+        Title="Star System Creator" Height="450" Width="800" Loaded="Window_Loaded">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*" />
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <Canvas x:Name ="SpaceCanvas"  Background="Black">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10*"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="30px"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Canvas x:Name ="SpaceCanvas"  Background="Black" MouseDown="SpaceCanvas_MouseDown">
             
         </Canvas>
         <GridSplitter Grid.Column="1" ShowsPreview="False" Width="3"
         HorizontalAlignment="Center" VerticalAlignment="Stretch" />
-        <Button Grid.Column="2" Content="Правая кнопка" Click="Button_Click" />
+        <StackPanel Grid.Column="2" Margin="5px">
+            <Canvas x:Name ="SpaceObjectView" Height="150px" Margin="5px" Background="Black">
+
+            </Canvas>
+            <Button  Content="Добавить тело на орбиту" Click="Button_Click" />
+            <TextBlock FontSize="14" FontWeight="Bold">Название</TextBlock>
+            <TextBlock x:Name ="SpaceObjectName" Margin="5 0 0 0" Text="Виктория"/>
+        </StackPanel>
+       
+        <StackPanel Grid.ColumnSpan="3" Grid.Row="2" Orientation="Horizontal">
+            <Button Background="Blue" MinWidth="30" Content="1" />
+            <Button Background="White" MinWidth="30" Content="2" />
+            <Button Background="Red" MinWidth="30" Content="3" />
+        </StackPanel>
     </Grid>
 </Window>
