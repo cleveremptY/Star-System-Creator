@@ -12,6 +12,7 @@ namespace StarSystem
 {
     public class SpaceObjectCanvasAdapter
     {
+        private bool isPressed;
         private SpaceObject baseSpaceObject;
         public SpaceObject BaseSpaceObject
         {
@@ -34,9 +35,17 @@ namespace StarSystem
             spaceEllipse.Fill = spaceEllipse.Stroke = new SolidColorBrush(BaseSpaceObject.ObjectColor);
             spaceEllipse.StrokeThickness = 1.5;
             SetPositon(spaceEllipse);
+            SetActions(spaceEllipse);
+            return spaceEllipse;
+        }
+
+        private void SetActions(Ellipse spaceEllipse)
+        {
             spaceEllipse.MouseEnter += SpaceObject_MouseEnter;
             spaceEllipse.MouseLeave += SpaceObject_MouseLeave;
-            return spaceEllipse;
+            spaceEllipse.MouseDown += SpaceObject_MouseDown;
+            if (baseSpaceObject is Star)
+                spaceEllipse.MouseDown += Star_MouseDown;
         }
 
         //Установка позиции относительно центра канваса
@@ -50,12 +59,25 @@ namespace StarSystem
 
         private void SpaceObject_MouseEnter(object sender, RoutedEventArgs e)
         {
-            ((Ellipse)sender).Stroke = Brushes.Red;
+            if (!isPressed)
+                ((Ellipse)sender).Stroke = Brushes.RosyBrown;
         }
 
         private void SpaceObject_MouseLeave(object sender, RoutedEventArgs e)
         {
-            ((Ellipse)sender).Stroke = ((Ellipse)sender).Fill;
+            if (!isPressed)
+                ((Ellipse)sender).Stroke = ((Ellipse)sender).Fill;
+        }
+
+        private void SpaceObject_MouseDown(object sender, RoutedEventArgs e)
+        {
+            isPressed = true;
+            ((Ellipse)sender).Stroke = Brushes.Red;
+        }
+
+        private void Star_MouseDown(object sender, RoutedEventArgs e)
+        {
+            ((Ellipse)sender).Stroke = Brushes.Red;
         }
     }
 }
