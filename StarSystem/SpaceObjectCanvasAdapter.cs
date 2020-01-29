@@ -65,7 +65,7 @@ namespace StarSystem
             {
                 Ellipse orbitEllipse = new Ellipse();
                 Planet BaseSpaceObjectPlanet = (Planet)BaseSpaceObject;
-                orbitEllipse.Width = orbitEllipse.Height = BaseSpaceObjectPlanet.OrbitRadius * 2.85;
+                orbitEllipse.Width = orbitEllipse.Height = BaseSpaceObjectPlanet.OrbitRadius * 2;
                 orbitEllipse.Fill = new SolidColorBrush(Color.FromArgb(0, 0, 0, 0));
                 orbitEllipse.Stroke = new SolidColorBrush(Color.FromArgb(255, 255, 0, 0));
                 orbitEllipse.StrokeThickness = 1.5;

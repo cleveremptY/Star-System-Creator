@@ -94,12 +94,6 @@ namespace StarSystem
         {
             //double angleRadian = angle * Math.PI / 180; ;
 
-            //double X = StarSystemParams.SystemCenter.X + (StarSystemParams.SelectedSpaceObject.ObjectPosition.X - StarSystemParams.SystemCenter.X) * Math.Cos(angle) -
-            //    (StarSystemParams.SelectedSpaceObject.ObjectPosition.Y - StarSystemParams.SystemCenter.Y) * Math.Sin(angle);
-            //double Y = StarSystemParams.SystemCenter.Y + (StarSystemParams.SelectedSpaceObject.ObjectPosition.Y - StarSystemParams.SystemCenter.Y) * Math.Cos(angle) +
-            //    (StarSystemParams.SelectedSpaceObject.ObjectPosition.X - StarSystemParams.SystemCenter.X) * Math.Sin(angle);
-            //StarSystemParams.SelectedSpaceObject.ObjectPosition = new Position(X, Y);
-
             Position Center = StarSystemParams.SystemCenter;
             Position TestPlanet = StarSystemParams.SelectedSpaceObject.ObjectPosition;
 

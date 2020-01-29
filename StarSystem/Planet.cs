@@ -29,7 +29,7 @@ namespace StarSystem
             this.orbitBase = orbitBase;
             OrbitRadius = orbitRadius;
             base.ObjectPosition = new Position(orbitBase.ObjectPosition.X  + OrbitRadius, 
-                orbitBase.ObjectPosition.Y + OrbitRadius);
+                orbitBase.ObjectPosition.Y);
         }
     }
 }
