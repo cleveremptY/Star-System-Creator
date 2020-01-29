@@ -11,6 +11,20 @@ namespace StarSystem
         public SpaceObjectCanvasAdapter MainStar { get; set; }
         public List<SpaceObjectCanvasAdapter> Planets { get; }
 
+        public List<SpaceObjectCanvasAdapter> AllSpaceObjects
+        {
+            get
+            {
+                List<SpaceObjectCanvasAdapter> allSpaceObjects = new List<SpaceObjectCanvasAdapter>();
+                allSpaceObjects.Add(MainStar);
+                foreach (var planet in Planets)
+                {
+                    allSpaceObjects.Add(planet);
+                }
+                return allSpaceObjects;
+            }
+        }
+
         public StarPlanetSystem()
         {
             Planets = new List<SpaceObjectCanvasAdapter>();

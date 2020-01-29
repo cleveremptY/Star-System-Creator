@@ -14,6 +14,9 @@ namespace StarSystem
     {
         private bool isPressed;
         private SpaceObject baseSpaceObject;
+        private Ellipse ellipseSpaceObject;
+        private Ellipse senderObject;
+
         public SpaceObject BaseSpaceObject
         {
             get
@@ -22,9 +25,18 @@ namespace StarSystem
             }
         }
 
+        public Ellipse EllipseSpaceObject
+        {
+            get
+            {
+                return ellipseSpaceObject;
+            }
+        }
+
         public SpaceObjectCanvasAdapter(SpaceObject spaceObject)
         {
             baseSpaceObject = spaceObject;
+            ellipseSpaceObject = DrawFunctional();
         }
 
         public Ellipse DrawFunctional(double resizeParam = 1)
@@ -84,8 +96,16 @@ namespace StarSystem
 
         private void SpaceObject_MouseDown(object sender, RoutedEventArgs e)
         {
+            foreach (var planet in StarSystemParams.MainStarSystem.AllSpaceObjects)
+                if (planet.isPressed)
+                {
+                    planet.isPressed = false;
+                    planet.senderObject.Stroke = planet.senderObject.Fill;
+                    break;
+                }
             isPressed = true;
-            ((Ellipse)sender).Stroke = Brushes.Red;
+            senderObject = ((Ellipse)sender);
+            senderObject.Stroke = Brushes.Red;
             StarSystemParams.selectedSpaceObject = baseSpaceObject;
         }
 

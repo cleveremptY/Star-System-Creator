@@ -11,5 +11,6 @@ namespace StarSystem
         public static Position SystemCenter { get; set; }
         public static Position SpaceObjectViewCenter { get; set; }
         public static SpaceObject selectedSpaceObject { get; set; }
+        public static StarPlanetSystem MainStarSystem { get; set; }
     }
 }

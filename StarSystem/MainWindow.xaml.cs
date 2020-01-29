@@ -22,11 +22,10 @@ namespace StarSystem
     {
         private bool isPlanetCreate;
         private Planet createPlanet;
-        private StarPlanetSystem MainSystem;
 
         public MainWindow()
         {
-            MainSystem = new StarPlanetSystem();
+            StarSystemParams.MainStarSystem = new StarPlanetSystem();
             InitializeComponent();
         }
 
@@ -35,28 +34,25 @@ namespace StarSystem
             Random rand = new Random();
 
             isPlanetCreate = true;
-            string basePlanetName = MainSystem.MainStar.BaseSpaceObject.Name + "-" + (MainSystem.Planets.Count + 1);
+            string basePlanetName = StarSystemParams.MainStarSystem.MainStar.BaseSpaceObject.Name + "-" + (StarSystemParams.MainStarSystem.Planets.Count + 1);
             Color basePlanetColor = Color.FromRgb(Convert.ToByte(rand.Next(256)),
                 Convert.ToByte(rand.Next(256)),
                 Convert.ToByte(rand.Next(256)));
             createPlanet = new Planet(basePlanetName, StarSystemParams.selectedSpaceObject, basePlanetColor);
-            MainSystem.Planets.Add(new SpaceObjectCanvasAdapter(createPlanet));
-            Ellipse ellipsePlanet = MainSystem.Planets[MainSystem.Planets.Count - 1].DrawFunctional();
+            StarSystemParams.MainStarSystem.Planets.Add(new SpaceObjectCanvasAdapter(createPlanet));
+            Ellipse ellipsePlanet = StarSystemParams.MainStarSystem.Planets[StarSystemParams.MainStarSystem.Planets.Count - 1].DrawFunctional();
             SpaceCanvas.Children.Add(ellipsePlanet);
 
-            //StarSystemParams.selectedSpaceObject = MainSystem.Planets[MainSystem.Planets.Count - 1].BaseSpaceObject;
-            //PrintSelectedSpaceObjectInfo();
-
-            MessageBox.Show(MainSystem.Planets[MainSystem.Planets.Count - 1].BaseSpaceObject.Name + "\n" +
-                MainSystem.Planets[MainSystem.Planets.Count - 1].BaseSpaceObject.ObjectPosition);
+            MessageBox.Show(StarSystemParams.MainStarSystem.Planets[StarSystemParams.MainStarSystem.Planets.Count - 1].BaseSpaceObject.Name + "\n" +
+                StarSystemParams.MainStarSystem.Planets[StarSystemParams.MainStarSystem.Planets.Count - 1].BaseSpaceObject.ObjectPosition);
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             StarSystemParams.SystemCenter = new Position(SpaceCanvas.ActualWidth / 2, SpaceCanvas.ActualHeight / 2);
-            SpaceCanvas.Children.Add(MainSystem.MainStar.DrawFunctional());
+            SpaceCanvas.Children.Add(StarSystemParams.MainStarSystem.MainStar.DrawFunctional());
 
-            StarSystemParams.selectedSpaceObject = MainSystem.MainStar.BaseSpaceObject;
+            StarSystemParams.selectedSpaceObject = StarSystemParams.MainStarSystem.MainStar.BaseSpaceObject;
             PrintSelectedSpaceObjectInfo();
         }
 
@@ -70,7 +66,7 @@ namespace StarSystem
             if (StarSystemParams.selectedSpaceObject != null)
             {
                 SpaceObjectName.Text = StarSystemParams.selectedSpaceObject.Name;
-                Ellipse viewPlanet = MainSystem.FindSpaceObject(StarSystemParams.selectedSpaceObject.Name).Draw(2);
+                Ellipse viewPlanet = StarSystemParams.MainStarSystem.FindSpaceObject(StarSystemParams.selectedSpaceObject.Name).Draw(2);
 
                 double left = (SpaceObjectView.ActualWidth - viewPlanet.Width) / 2;
                 Canvas.SetLeft(viewPlanet, left);
@@ -96,9 +92,9 @@ namespace StarSystem
         {
             StarSystemParams.SystemCenter = new Position(SpaceCanvas.ActualWidth / 2, SpaceCanvas.ActualHeight / 2);
             SpaceCanvas.Children.Clear();
-            SpaceCanvas.Children.Add(MainSystem.MainStar.DrawFunctional());
-            if (MainSystem.Planets != null)
-                foreach (var planet in MainSystem.Planets)
+            SpaceCanvas.Children.Add(StarSystemParams.MainStarSystem.MainStar.DrawFunctional());
+            if (StarSystemParams.MainStarSystem.Planets != null)
+                foreach (var planet in StarSystemParams.MainStarSystem.Planets)
                     SpaceCanvas.Children.Add(planet.DrawFunctional());
         }
 
