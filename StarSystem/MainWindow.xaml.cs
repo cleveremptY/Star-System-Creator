@@ -26,6 +26,7 @@ namespace StarSystem
 
         public MainWindow()
         {
+            MainSystem = new StarPlanetSystem();
             InitializeComponent();
         }
 
@@ -52,7 +53,6 @@ namespace StarSystem
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            MainSystem = new StarPlanetSystem();
             StarSystemParams.SystemCenter = new Position(SpaceCanvas.ActualWidth / 2, SpaceCanvas.ActualHeight / 2);
             SpaceCanvas.Children.Add(MainSystem.MainStar.DrawFunctional());
 
@@ -62,21 +62,50 @@ namespace StarSystem
 
         private void SpaceCanvas_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            SpaceObjectView.Children.Clear();
-            PrintSelectedSpaceObjectInfo();
+            RedrawSpaceObjectView();
         }
 
         private void PrintSelectedSpaceObjectInfo()
         {
-            SpaceObjectName.Text = StarSystemParams.selectedSpaceObject.Name;
-            Ellipse viewPlanet = MainSystem.FindSpaceObject(StarSystemParams.selectedSpaceObject.Name).Draw(2);
-            
-            double left = (SpaceObjectView.ActualWidth - viewPlanet.Width) / 2;
-            Canvas.SetLeft(viewPlanet, left);
-            double top = (SpaceObjectView.ActualHeight - viewPlanet.Height) / 2;
-            Canvas.SetTop(viewPlanet, top);
+            if (StarSystemParams.selectedSpaceObject != null)
+            {
+                SpaceObjectName.Text = StarSystemParams.selectedSpaceObject.Name;
+                Ellipse viewPlanet = MainSystem.FindSpaceObject(StarSystemParams.selectedSpaceObject.Name).Draw(2);
 
-            SpaceObjectView.Children.Add(viewPlanet);
+                double left = (SpaceObjectView.ActualWidth - viewPlanet.Width) / 2;
+                Canvas.SetLeft(viewPlanet, left);
+                double top = (SpaceObjectView.ActualHeight - viewPlanet.Height) / 2;
+                Canvas.SetTop(viewPlanet, top);
+
+                SpaceObjectView.Children.Add(viewPlanet);
+            }
+        }
+
+        private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            RedrawAll();
+        }
+
+        public void RedrawAll()
+        {
+            RedrawSpaceObjectView();
+            RedrawSystem();
+        }
+
+        public void RedrawSystem()
+        {
+            StarSystemParams.SystemCenter = new Position(SpaceCanvas.ActualWidth / 2, SpaceCanvas.ActualHeight / 2);
+            SpaceCanvas.Children.Clear();
+            SpaceCanvas.Children.Add(MainSystem.MainStar.DrawFunctional());
+            if (MainSystem.Planets != null)
+                foreach (var planet in MainSystem.Planets)
+                    SpaceCanvas.Children.Add(planet.DrawFunctional());
+        }
+
+        public void RedrawSpaceObjectView()
+        {
+            SpaceObjectView.Children.Clear();
+            PrintSelectedSpaceObjectInfo();
         }
     }
 }

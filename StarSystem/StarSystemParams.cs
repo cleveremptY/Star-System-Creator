@@ -9,6 +9,7 @@ namespace StarSystem
     static class StarSystemParams
     {
         public static Position SystemCenter { get; set; }
+        public static Position SpaceObjectViewCenter { get; set; }
         public static SpaceObject selectedSpaceObject { get; set; }
     }
 }

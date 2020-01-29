@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:StarSystem"
         mc:Ignorable="d"
-        Title="Star System Creator" Height="450" Width="800" Loaded="Window_Loaded">
+        Title="Star System Creator" Height="450" Width="800" Loaded="Window_Loaded" SizeChanged="Window_SizeChanged">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*" />

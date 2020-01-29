@@ -40,7 +40,6 @@ namespace StarSystem
         {
             Ellipse spaceEllipse = new Ellipse();
             spaceEllipse.Width = spaceEllipse.Height = BaseSpaceObject.Radius * 2 * resizeParam;
-            spaceEllipse.VerticalAlignment = VerticalAlignment.Top;
             spaceEllipse.Fill = spaceEllipse.Stroke = new SolidColorBrush(BaseSpaceObject.ObjectColor);
             spaceEllipse.StrokeThickness = 1.5;
             return spaceEllipse;
@@ -57,15 +56,14 @@ namespace StarSystem
 
         protected void SetPositonCenter(Ellipse spaceEllipse)
         {
-            //double left = StarSystemParams.SystemCenter.X - spaceEllipse.ActualWidth / 2 + BaseSpaceObject.ObjectPosition.X;
-            //Canvas.SetLeft(spaceEllipse, left);
-            //double top = StarSystemParams.SystemCenter.Y - spaceEllipse.ActualHeight / 2 + BaseSpaceObject.ObjectPosition.Y;
-            //Canvas.SetTop(spaceEllipse, top);
             SetPositonCenter(spaceEllipse, StarSystemParams.SystemCenter);
         }
 
         protected void SetPositonCenter(Ellipse spaceEllipse, Position canvasCenter)
         {
+            spaceEllipse.VerticalAlignment = VerticalAlignment.Center;
+            spaceEllipse.HorizontalAlignment = HorizontalAlignment.Center;
+
             double left = canvasCenter.X - spaceEllipse.Width / 2 + BaseSpaceObject.ObjectPosition.X;
             Canvas.SetLeft(spaceEllipse, left);
             double top = canvasCenter.Y - spaceEllipse.Height / 2 + BaseSpaceObject.ObjectPosition.Y;
