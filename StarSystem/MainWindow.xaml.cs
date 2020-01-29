@@ -58,7 +58,7 @@ namespace StarSystem
 
             timerSystem = new DispatcherTimer();
             timerSystem.Tick += new EventHandler(timerTick);
-            timerSystem.Interval = new TimeSpan(0, 0, 1);
+            timerSystem.Interval = new TimeSpan(0, 0, 0, 0, 30);
 
             StarSystemParams.SelectedSpaceObject = StarSystemParams.MainStarSystem.MainStar.BaseSpaceObject;
             PrintSelectedSpaceObjectInfo();
@@ -94,7 +94,8 @@ namespace StarSystem
         {
             //double angleRadian = angle * Math.PI / 180; ;
 
-            Position Center = StarSystemParams.SystemCenter;
+            //Position Center = StarSystemParams.SystemCenter;
+            Position Center = StarSystemParams.MainStarSystem.MainStar.BaseSpaceObject.ObjectPosition;
             Position TestPlanet = StarSystemParams.SelectedSpaceObject.ObjectPosition;
 
             double X = Center.X + (TestPlanet.X - Center.X) * Math.Cos(angle) - (TestPlanet.Y - Center.Y) * Math.Sin(angle);
