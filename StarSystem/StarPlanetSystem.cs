@@ -32,6 +32,14 @@ namespace StarSystem
             MainStar = new SpaceObjectCanvasAdapter(new Star("Солнце", 20, StarTypes.Yellow));
         }
 
+        public void AnimationIteration()
+        {
+            foreach (var planet in Planets)
+            {
+                ((Planet)planet.BaseSpaceObject).Move();
+            }
+        }
+
         public SpaceObjectCanvasAdapter FindSpaceObject(string name)
         {
             if (MainStar.BaseSpaceObject.Name == name)

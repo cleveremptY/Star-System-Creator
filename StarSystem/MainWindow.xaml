@@ -29,6 +29,10 @@
             <Button  Content="Добавить тело на орбиту" Click="Button_Click" />
             <TextBlock FontSize="14" FontWeight="Bold">Название</TextBlock>
             <TextBox x:Name ="SpaceObjectName" Margin="5 0 0 0" Text="Виктория" TextChanged="SpaceObjectName_TextChanged"/>
+            <TextBlock FontSize="14" FontWeight="Bold">Радиус</TextBlock>
+            <Slider x:Name ="SpaceObjectRadius" Margin="5 0 0 0" Minimum="1" Maximum="50" ValueChanged="SpaceObjectRadius_ValueChanged"/>
+            <TextBlock FontSize="14" FontWeight="Bold">Орбитальный радиус</TextBlock>
+            <Slider x:Name ="SpaceObjectOrbitRadius" Margin="5 0 0 0" Minimum="1" Maximum="100"/>
         </StackPanel>
        
         <StackPanel Grid.ColumnSpan="3" Grid.Row="2" Orientation="Horizontal">

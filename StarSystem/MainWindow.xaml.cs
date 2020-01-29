@@ -22,7 +22,6 @@ namespace StarSystem
     public partial class MainWindow : Window
     {
         private Planet createPlanet;
-        double angle = 0.05;
 
         DispatcherTimer timerSystem;
 
@@ -74,6 +73,12 @@ namespace StarSystem
             if (StarSystemParams.SelectedSpaceObject != null)
             {
                 SpaceObjectName.Text = StarSystemParams.SelectedSpaceObject.Name;
+                SpaceObjectRadius.Value = StarSystemParams.SelectedSpaceObject.Radius;
+                if (StarSystemParams.MainStarSystem.MainStar.BaseSpaceObject.Name != StarSystemParams.SelectedSpaceObject.Name)
+                {
+                    SpaceObjectOrbitRadius.Value =
+                        ((Planet)StarSystemParams.MainStarSystem.FindSpaceObject(StarSystemParams.SelectedSpaceObject.Name).BaseSpaceObject).OrbitRadius;
+                }
                 Ellipse viewPlanet = StarSystemParams.MainStarSystem.FindSpaceObject(StarSystemParams.SelectedSpaceObject.Name).Draw(2);
 
                 double left = (SpaceObjectView.ActualWidth - viewPlanet.Width) / 2;
@@ -92,20 +97,8 @@ namespace StarSystem
 
         private void timerTick(object sender, EventArgs e)
         {
-            //double angleRadian = angle * Math.PI / 180; ;
-
-            //Position Center = StarSystemParams.SystemCenter;
-            Position Center = StarSystemParams.MainStarSystem.MainStar.BaseSpaceObject.ObjectPosition;
-            Position TestPlanet = StarSystemParams.SelectedSpaceObject.ObjectPosition;
-
-            double X = Center.X + (TestPlanet.X - Center.X) * Math.Cos(angle) - (TestPlanet.Y - Center.Y) * Math.Sin(angle);
-            double Y = Center.Y + (TestPlanet.Y - Center.Y) * Math.Cos(angle) + (TestPlanet.X - Center.X) * Math.Sin(angle);
-
-            StarSystemParams.SelectedSpaceObject.ObjectPosition = new Position(X, Y);
-
+            StarSystemParams.MainStarSystem.AnimationIteration();
             RedrawSystem();
-            //X = x0 + (x - x0) * cos(a) - (y - y0) * sin(a);
-            //Y = y0 + (y - y0) * cos(a) + (x - x0) * sin(a);
         }
 
         public void RedrawAll()
@@ -148,6 +141,12 @@ namespace StarSystem
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             timerSystem.Start();
+        }
+
+        private void SpaceObjectRadius_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            StarSystemParams.SelectedSpaceObject.Radius = SpaceObjectRadius.Value;
+            RedrawAll();
         }
     }
 }
