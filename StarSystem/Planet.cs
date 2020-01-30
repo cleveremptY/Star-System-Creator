@@ -28,9 +28,17 @@ namespace StarSystem
             }
             set
             {
+                GeneralLineForm startLine = new GeneralLineForm(OrbitBase.ObjectPosition, new Position(orbitBase.ObjectPosition.X + OrbitRadius,
+                orbitBase.ObjectPosition.Y));
+
+                GeneralLineForm currectLine = new GeneralLineForm(OrbitBase.ObjectPosition, ObjectPosition);
+
+                double currectAngle = startLine.GetAngle(currectLine);
+
                 orbitRadius = value;
-                base.ObjectPosition = new Position(orbitBase.ObjectPosition.X + OrbitRadius,
+                ObjectPosition = new Position(orbitBase.ObjectPosition.X + OrbitRadius,
                 orbitBase.ObjectPosition.Y);
+                MoveByAngle(currectAngle);
             }
         }
         public Planet(string name, SpaceObject orbitBase, Color planetColor, double radius = 10, double orbitRadius = 60)
@@ -54,9 +62,18 @@ namespace StarSystem
             double Y = Center.Y + (ObjectPosition.Y - Center.Y) * Math.Cos(Angle) + (ObjectPosition.X - Center.X) * Math.Sin(Angle);
 
             ObjectPosition = new Position(X, Y);
+        }
 
-            //X = x0 + (x - x0) * cos(a) - (y - y0) * sin(a);
-            //Y = y0 + (y - y0) * cos(a) + (x - x0) * sin(a);
+        public void MoveByAngle(double angle)
+        {
+            double angleRadian = angle * Math.PI / 180;
+
+            Position Center = orbitBase.ObjectPosition;
+
+            double X = Center.X + (ObjectPosition.X - Center.X) * Math.Cos(angleRadian) - (ObjectPosition.Y - Center.Y) * Math.Sin(angleRadian);
+            double Y = Center.Y + (ObjectPosition.Y - Center.Y) * Math.Cos(angleRadian) + (ObjectPosition.X - Center.X) * Math.Sin(angleRadian);
+
+            ObjectPosition = new Position(X, Y);
         }
     }
 }

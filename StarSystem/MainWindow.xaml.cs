@@ -140,7 +140,10 @@ namespace StarSystem
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            timerSystem.Start();
+            if (timerSystem.IsEnabled)
+                timerSystem.Stop();
+            else
+                timerSystem.Start();
         }
 
         private void SpaceObjectRadius_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
@@ -156,6 +159,19 @@ namespace StarSystem
             if (StarSystemParams.SelectedSpaceObject == null || StarSystemParams.MainStarSystem.MainStar.BaseSpaceObject.Name == StarSystemParams.SelectedSpaceObject.Name)
                 return;
             ((Planet)StarSystemParams.SelectedSpaceObject).OrbitRadius = SpaceObjectOrbitRadius.Value;
+            RedrawSystem();
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show(StarSystemParams.SelectedSpaceObject.ObjectPosition.ToString());
+        }
+
+        private void Button_Click_3(object sender, RoutedEventArgs e)
+        {
+            if (StarSystemParams.SelectedSpaceObject == null)
+                return;
+            ((Planet)StarSystemParams.SelectedSpaceObject).MoveByAngle(45);
             RedrawSystem();
         }
     }

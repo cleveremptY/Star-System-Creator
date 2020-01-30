@@ -37,8 +37,8 @@
        
         <StackPanel Grid.ColumnSpan="3" Grid.Row="2" Orientation="Horizontal">
             <Button Background="Blue" MinWidth="30" Content="1" Click="Button_Click_1" />
-            <Button Background="White" MinWidth="30" Content="2" />
-            <Button Background="Red" MinWidth="30" Content="3" />
+            <Button Background="White" MinWidth="30" Content="2" Click="Button_Click_2" />
+            <Button Background="Red" MinWidth="30" Content="3" Click="Button_Click_3" />
         </StackPanel>
     </Grid>
 </Window>
