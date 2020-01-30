@@ -17,7 +17,7 @@ namespace StarSystem
         public Color ObjectColor { get; set; }
         public Position ObjectPosition { get; set; }
 
-        public SpaceObject(string name, int radius = 1, Position position = new Position(), Color objectColor = new Color())
+        public SpaceObject(string name, double radius = 1, Position position = new Position(), Color objectColor = new Color())
         {
             Name = name;
             Radius = radius;

@@ -10,6 +10,7 @@ namespace StarSystem
     class Planet : SpaceObject
     {
         private SpaceObject orbitBase;
+        private double orbitRadius;
 
         public double Angle { get; set; } = 0.05;
 
@@ -20,8 +21,19 @@ namespace StarSystem
                 return orbitBase;
             }
         }
-        public int OrbitRadius { get; set; }
-        public Planet(string name, SpaceObject orbitBase, Color planetColor, int radius = 10, int orbitRadius = 60)
+        public double OrbitRadius {
+            get
+            {
+                return orbitRadius;
+            }
+            set
+            {
+                orbitRadius = value;
+                base.ObjectPosition = new Position(orbitBase.ObjectPosition.X + OrbitRadius,
+                orbitBase.ObjectPosition.Y);
+            }
+        }
+        public Planet(string name, SpaceObject orbitBase, Color planetColor, double radius = 10, double orbitRadius = 60)
         : base(name, radius, objectColor:planetColor)
         {
             //Random rnd = new Random();

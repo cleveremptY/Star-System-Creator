@@ -145,8 +145,18 @@ namespace StarSystem
 
         private void SpaceObjectRadius_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
+            if (StarSystemParams.SelectedSpaceObject == null)
+                return;
             StarSystemParams.SelectedSpaceObject.Radius = SpaceObjectRadius.Value;
             RedrawAll();
+        }
+
+        private void SpaceObjectOrbitRadius_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            if (StarSystemParams.SelectedSpaceObject == null || StarSystemParams.MainStarSystem.MainStar.BaseSpaceObject.Name == StarSystemParams.SelectedSpaceObject.Name)
+                return;
+            ((Planet)StarSystemParams.SelectedSpaceObject).OrbitRadius = SpaceObjectOrbitRadius.Value;
+            RedrawSystem();
         }
     }
 }
