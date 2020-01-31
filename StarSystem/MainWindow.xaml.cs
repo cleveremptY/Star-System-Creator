@@ -29,6 +29,7 @@ namespace StarSystem
         {
             StarSystemParams.MainStarSystem = new StarPlanetSystem();
             InitializeComponent();
+            SystemSpeed.Value = StarSystemParams.StarSystemSpeed;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -146,9 +147,15 @@ namespace StarSystem
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             if (timerSystem.IsEnabled)
+            {
                 timerSystem.Stop();
+                PlayButton.Content = "4";
+            }
             else
+            {
                 timerSystem.Start();
+                PlayButton.Content = ";";
+            }
         }
 
         private void SpaceObjectRadius_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
@@ -186,6 +193,11 @@ namespace StarSystem
                 return;
             ((Planet)StarSystemParams.SelectedSpaceObject).Speed = SpaceObjectSpeed.Value;
             //RedrawSystem();
+        }
+
+        private void SystemSpeed_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            StarSystemParams.StarSystemSpeed = SystemSpeed.Value;
         }
     }
 }

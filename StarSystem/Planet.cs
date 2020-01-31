@@ -63,8 +63,8 @@ namespace StarSystem
         {
             Position Center = orbitBase.ObjectPosition;
 
-            double X = Center.X + (ObjectPosition.X - Center.X) * Math.Cos(Angle * Speed) - (ObjectPosition.Y - Center.Y) * Math.Sin(Angle * Speed);
-            double Y = Center.Y + (ObjectPosition.Y - Center.Y) * Math.Cos(Angle * Speed) + (ObjectPosition.X - Center.X) * Math.Sin(Angle * Speed);
+            double X = Center.X + (ObjectPosition.X - Center.X) * Math.Cos(Angle * Speed * StarSystemParams.StarSystemSpeed) - (ObjectPosition.Y - Center.Y) * Math.Sin(Angle * Speed * StarSystemParams.StarSystemSpeed);
+            double Y = Center.Y + (ObjectPosition.Y - Center.Y) * Math.Cos(Angle * Speed * StarSystemParams.StarSystemSpeed) + (ObjectPosition.X - Center.X) * Math.Sin(Angle * Speed * StarSystemParams.StarSystemSpeed);
 
             ObjectPosition = new Position(X, Y);
         }
