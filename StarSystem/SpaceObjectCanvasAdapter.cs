@@ -16,6 +16,7 @@ namespace StarSystem
         private SpaceObject baseSpaceObject;
         private Ellipse ellipseSpaceObject;
         private Ellipse senderObject;
+        private Ellipse senderOrbit;
 
         public SpaceObject BaseSpaceObject
         {
@@ -26,6 +27,14 @@ namespace StarSystem
         }
 
         public Ellipse EllipseSpaceObject
+        {
+            get
+            {
+                return senderObject;
+            }
+        }
+
+        public Ellipse EllipseOrbit
         {
             get
             {
@@ -70,6 +79,9 @@ namespace StarSystem
                 orbitEllipse.Stroke = new SolidColorBrush(Color.FromArgb(255, 255, 0, 0));
                 orbitEllipse.StrokeThickness = 1.5;
                 SetPositonCenter(orbitEllipse, StarSystemParams.SystemCenter, BaseSpaceObjectPlanet.OrbitBase.ObjectPosition);
+                orbitEllipse.IsHitTestVisible = false;
+
+                senderOrbit = orbitEllipse;
                 return orbitEllipse;
             }
             return null;
@@ -124,6 +136,7 @@ namespace StarSystem
                 {
                     planet.isPressed = false;
                     planet.senderObject.Stroke = planet.senderObject.Fill;
+                    //senderOrbit.Visibility = Visibility.Hidden;
                     break;
                 }
             isPressed = true;

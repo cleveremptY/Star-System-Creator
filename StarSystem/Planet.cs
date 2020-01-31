@@ -19,7 +19,9 @@ namespace StarSystem
             }
         }
 
-        public double Angle { get; set; } = 0.05;
+        public double Angle { get; set; } = 0.001;
+
+        public double Speed { get; set; } = 100;
 
         public SpaceObject OrbitBase
         {
@@ -61,8 +63,8 @@ namespace StarSystem
         {
             Position Center = orbitBase.ObjectPosition;
 
-            double X = Center.X + (ObjectPosition.X - Center.X) * Math.Cos(Angle) - (ObjectPosition.Y - Center.Y) * Math.Sin(Angle);
-            double Y = Center.Y + (ObjectPosition.Y - Center.Y) * Math.Cos(Angle) + (ObjectPosition.X - Center.X) * Math.Sin(Angle);
+            double X = Center.X + (ObjectPosition.X - Center.X) * Math.Cos(Angle * Speed) - (ObjectPosition.Y - Center.Y) * Math.Sin(Angle * Speed);
+            double Y = Center.Y + (ObjectPosition.Y - Center.Y) * Math.Cos(Angle * Speed) + (ObjectPosition.X - Center.X) * Math.Sin(Angle * Speed);
 
             ObjectPosition = new Position(X, Y);
         }

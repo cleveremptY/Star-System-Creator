@@ -33,6 +33,8 @@
             <Slider x:Name ="SpaceObjectRadius" Margin="5 0 0 0" Minimum="1" Maximum="150" ValueChanged="SpaceObjectRadius_ValueChanged"/>
             <TextBlock FontSize="14" FontWeight="Bold">Орбитальный радиус</TextBlock>
             <Slider x:Name ="SpaceObjectOrbitRadius" Margin="5 0 0 0" Minimum="1" Maximum="500" ValueChanged="SpaceObjectOrbitRadius_ValueChanged"/>
+            <TextBlock FontSize="14" FontWeight="Bold">Скорость вращения</TextBlock>
+            <Slider x:Name ="SpaceObjectSpeed" Margin="5 0 0 0" Minimum="0" Maximum="800" ValueChanged="SpaceObjectSpeed_ValueChanged"/>
         </StackPanel>
        
         <StackPanel Grid.ColumnSpan="3" Grid.Row="2" Orientation="Horizontal">

@@ -78,6 +78,8 @@ namespace StarSystem
                 {
                     SpaceObjectOrbitRadius.Value =
                         ((Planet)StarSystemParams.MainStarSystem.FindSpaceObject(StarSystemParams.SelectedSpaceObject.Name).BaseSpaceObject).OrbitRadius;
+                    SpaceObjectSpeed.Value = 
+                        ((Planet)StarSystemParams.MainStarSystem.FindSpaceObject(StarSystemParams.SelectedSpaceObject.Name).BaseSpaceObject).Speed;
                 }
                 Ellipse viewPlanet = StarSystemParams.MainStarSystem.FindSpaceObject(StarSystemParams.SelectedSpaceObject.Name).Draw(2);
 
@@ -114,7 +116,10 @@ namespace StarSystem
             SpaceCanvas.Children.Add(StarSystemParams.MainStarSystem.MainStar.DrawFunctional());
             if (StarSystemParams.MainStarSystem.Planets != null)
                 foreach (var planet in StarSystemParams.MainStarSystem.Planets)
+                {
+                    SpaceCanvas.Children.Add(planet.DrawOrbit());
                     SpaceCanvas.Children.Add(planet.DrawFunctional());
+                }
         }
 
         public void RedrawSpaceObjectView()
@@ -173,6 +178,14 @@ namespace StarSystem
                 return;
             ((Planet)StarSystemParams.SelectedSpaceObject).MoveByAngle(45);
             RedrawSystem();
+        }
+
+        private void SpaceObjectSpeed_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            if (StarSystemParams.SelectedSpaceObject == null || StarSystemParams.MainStarSystem.MainStar.BaseSpaceObject.Name == StarSystemParams.SelectedSpaceObject.Name)
+                return;
+            ((Planet)StarSystemParams.SelectedSpaceObject).Speed = SpaceObjectSpeed.Value;
+            //RedrawSystem();
         }
     }
 }
