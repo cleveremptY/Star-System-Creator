@@ -39,8 +39,6 @@
        
         <StackPanel Grid.ColumnSpan="3" Grid.Row="2" Orientation="Horizontal">
             <Button x:Name ="PlayButton" MinWidth="30" Content="4" Click="Button_Click_1" FontFamily="Webdings" />
-            <Button  MinWidth="30" Content="2" Click="Button_Click_2" />
-            <Button  MinWidth="30" Content="3" Click="Button_Click_3" />
             <Slider x:Name ="SystemSpeed" Minimum="-10" Maximum="10" Width="400" ValueChanged="SystemSpeed_ValueChanged" />
         </StackPanel>
     </Grid>

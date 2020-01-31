@@ -172,19 +172,6 @@ namespace StarSystem
             RedrawSystem();
         }
 
-        private void Button_Click_2(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show(StarSystemParams.SelectedSpaceObject.ObjectPosition.ToString());
-        }
-
-        private void Button_Click_3(object sender, RoutedEventArgs e)
-        {
-            if (StarSystemParams.SelectedSpaceObject == null)
-                return;
-            ((Planet)StarSystemParams.SelectedSpaceObject).MoveByAngle(45);
-            RedrawSystem();
-        }
-
         private void SpaceObjectSpeed_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             if (StarSystemParams.SelectedSpaceObject == null || StarSystemParams.MainStarSystem.MainStar.BaseSpaceObject.Name == StarSystemParams.SelectedSpaceObject.Name)
