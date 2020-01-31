@@ -46,9 +46,6 @@ namespace StarSystem
             Ellipse ellipsePlanetOrbit = StarSystemParams.MainStarSystem.Planets[StarSystemParams.MainStarSystem.Planets.Count - 1].DrawOrbit();
             SpaceCanvas.Children.Add(ellipsePlanetOrbit);
             SpaceCanvas.Children.Add(ellipsePlanet);
-
-            MessageBox.Show(StarSystemParams.MainStarSystem.Planets[StarSystemParams.MainStarSystem.Planets.Count - 1].BaseSpaceObject.Name + "\n" +
-                StarSystemParams.MainStarSystem.Planets[StarSystemParams.MainStarSystem.Planets.Count - 1].BaseSpaceObject.ObjectPosition);
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -133,14 +130,15 @@ namespace StarSystem
         {
             if (StarSystemParams.SelectedSpaceObject == null)
                 return;
-            if ( StarSystemParams.MainStarSystem.FindSpaceObject(SpaceObjectName.Text) == null)
+            if (StarSystemParams.MainStarSystem.FindSpaceObject(SpaceObjectName.Text) == null)
             {
                 SpaceObjectName.Foreground = Brushes.Black;
                 StarSystemParams.SelectedSpaceObject.Name = SpaceObjectName.Text;
             }
             else
             {
-                SpaceObjectName.Foreground = Brushes.Red;
+                if (SpaceObjectName.Text != StarSystemParams.SelectedSpaceObject.Name)
+                    SpaceObjectName.Foreground = Brushes.Red;
             }
         }
 
