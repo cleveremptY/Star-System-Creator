@@ -225,7 +225,7 @@ namespace StarSystem
         private void SystemSize_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             StarSystemParams.StarSystemSize = SystemSize.Value;
-            StarSystemParams.MainStarSystem.Resize();
+            //StarSystemParams.MainStarSystem.Resize();
             RedrawAll();
         }
     }
