@@ -62,7 +62,7 @@ namespace StarSystem
         public Ellipse Draw(double resizeParam = 1)
         {
             Ellipse spaceEllipse = new Ellipse();
-            spaceEllipse.Width = spaceEllipse.Height = BaseSpaceObject.Radius * 2 * resizeParam;
+            spaceEllipse.Width = spaceEllipse.Height = BaseSpaceObject.Radius * 2 * resizeParam * StarSystemParams.StarSystemSize;
             spaceEllipse.Fill = spaceEllipse.Stroke = new SolidColorBrush(BaseSpaceObject.ObjectColor);
             spaceEllipse.StrokeThickness = 1.5;
             return spaceEllipse;

@@ -49,5 +49,13 @@ namespace StarSystem
                     return planet;
             return null;
         }
+
+        public void Resize()
+        {
+            foreach (var planet in Planets)
+            {
+                ((Planet)(planet.BaseSpaceObject)).OrbitRadius = ((Planet)(planet.BaseSpaceObject)).OrbitRadius;
+            }
+        }
     }
 }

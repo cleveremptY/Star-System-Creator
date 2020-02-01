@@ -30,6 +30,7 @@ namespace StarSystem
             StarSystemParams.MainStarSystem = new StarPlanetSystem();
             InitializeComponent();
             SystemSpeed.Value = StarSystemParams.StarSystemSpeed;
+            SystemSize.Value = StarSystemParams.StarSystemSize;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -218,6 +219,13 @@ namespace StarSystem
             if (StarSystemParams.SelectedSpaceObject == null || StarSystemParams.MainStarSystem.MainStar.BaseSpaceObject.Name == StarSystemParams.SelectedSpaceObject.Name)
                 return;
             StarSystemParams.SelectedSpaceObject.ObjectColor = (Color)PlanetColorPicker.SelectedColor;
+            RedrawAll();
+        }
+
+        private void SystemSize_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            StarSystemParams.StarSystemSize = SystemSize.Value;
+            StarSystemParams.MainStarSystem.Resize();
             RedrawAll();
         }
     }
