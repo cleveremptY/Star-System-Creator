@@ -70,14 +70,21 @@ namespace StarSystem
         {
             if (StarSystemParams.SelectedSpaceObject != null)
             {
+                SetParamsVisibility();
+
                 SpaceObjectName.Text = StarSystemParams.SelectedSpaceObject.Name;
                 SpaceObjectRadius.Value = StarSystemParams.SelectedSpaceObject.Radius;
                 if (StarSystemParams.MainStarSystem.MainStar.BaseSpaceObject.Name != StarSystemParams.SelectedSpaceObject.Name)
                 {
                     SpaceObjectOrbitRadius.Value =
                         ((Planet)StarSystemParams.MainStarSystem.FindSpaceObject(StarSystemParams.SelectedSpaceObject.Name).BaseSpaceObject).OrbitRadius;
-                    SpaceObjectSpeed.Value = 
+                    SpaceObjectSpeed.Value =
                         ((Planet)StarSystemParams.MainStarSystem.FindSpaceObject(StarSystemParams.SelectedSpaceObject.Name).BaseSpaceObject).Speed;
+                    PlanetColorPicker.SelectedColor = StarSystemParams.MainStarSystem.FindSpaceObject(StarSystemParams.SelectedSpaceObject.Name).BaseSpaceObject.ObjectColor;
+                }
+                else
+                {
+                    StarType.SelectedIndex = (int)((Star)StarSystemParams.SelectedSpaceObject).Type;
                 }
                 Ellipse viewPlanet = StarSystemParams.MainStarSystem.FindSpaceObject(StarSystemParams.SelectedSpaceObject.Name).Draw(2);
 
@@ -87,6 +94,20 @@ namespace StarSystem
                 Canvas.SetTop(viewPlanet, top);
 
                 SpaceObjectView.Children.Add(viewPlanet);
+            }
+        }
+
+        private void SetParamsVisibility()
+        {
+            if (StarSystemParams.SelectedSpaceObject.Name == StarSystemParams.MainStarSystem.MainStar.BaseSpaceObject.Name)
+            {
+                PlanetParams.Visibility = Visibility.Collapsed;
+                StarParams.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                PlanetParams.Visibility = Visibility.Visible;
+                StarParams.Visibility = Visibility.Collapsed;
             }
         }
 
@@ -177,12 +198,27 @@ namespace StarSystem
             if (StarSystemParams.SelectedSpaceObject == null || StarSystemParams.MainStarSystem.MainStar.BaseSpaceObject.Name == StarSystemParams.SelectedSpaceObject.Name)
                 return;
             ((Planet)StarSystemParams.SelectedSpaceObject).Speed = SpaceObjectSpeed.Value;
-            //RedrawSystem();
         }
 
         private void SystemSpeed_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             StarSystemParams.StarSystemSpeed = SystemSpeed.Value;
+        }
+
+        private void StarType_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (StarSystemParams.SelectedSpaceObject == null || StarSystemParams.MainStarSystem.MainStar.BaseSpaceObject.Name != StarSystemParams.SelectedSpaceObject.Name)
+                return;
+            ((Star)StarSystemParams.SelectedSpaceObject).Type = (StarTypes)StarType.SelectedIndex;
+            RedrawAll();
+        }
+
+        private void PlanetColorPicker_SelectedColorChanged(object sender, RoutedPropertyChangedEventArgs<Color?> e)
+        {
+            if (StarSystemParams.SelectedSpaceObject == null || StarSystemParams.MainStarSystem.MainStar.BaseSpaceObject.Name == StarSystemParams.SelectedSpaceObject.Name)
+                return;
+            StarSystemParams.SelectedSpaceObject.ObjectColor = (Color)PlanetColorPicker.SelectedColor;
+            RedrawAll();
         }
     }
 }

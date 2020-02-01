@@ -3,9 +3,10 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:local="clr-namespace:StarSystem"
         mc:Ignorable="d"
-        Title="Star System Creator" Height="450" Width="800" Loaded="Window_Loaded" SizeChanged="Window_SizeChanged">
+        Title="Star System Creator" Height="500" Width="800" Loaded="Window_Loaded" SizeChanged="Window_SizeChanged" MinWidth="800" MinHeight="500">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*" />
@@ -31,15 +32,28 @@
             <TextBox x:Name ="SpaceObjectName" Margin="5 0 0 0" Text="Виктория" TextChanged="SpaceObjectName_TextChanged"/>
             <TextBlock FontSize="14" FontWeight="Bold">Радиус</TextBlock>
             <Slider x:Name ="SpaceObjectRadius" Margin="5 0 0 0" Minimum="1" Maximum="150" ValueChanged="SpaceObjectRadius_ValueChanged"/>
-            <TextBlock FontSize="14" FontWeight="Bold">Орбитальный радиус</TextBlock>
-            <Slider x:Name ="SpaceObjectOrbitRadius" Margin="5 0 0 0" Minimum="1" Maximum="500" ValueChanged="SpaceObjectOrbitRadius_ValueChanged"/>
-            <TextBlock FontSize="14" FontWeight="Bold">Скорость вращения</TextBlock>
-            <Slider x:Name ="SpaceObjectSpeed" Margin="5 0 0 0" Minimum="0" Maximum="800" ValueChanged="SpaceObjectSpeed_ValueChanged"/>
+            <StackPanel x:Name="PlanetParams">
+                <TextBlock FontSize="14" FontWeight="Bold">Орбитальный радиус</TextBlock>
+                <Slider x:Name ="SpaceObjectOrbitRadius" Margin="5 0 0 0" Minimum="1" Maximum="500" ValueChanged="SpaceObjectOrbitRadius_ValueChanged"/>
+                <TextBlock FontSize="14" FontWeight="Bold">Скорость вращения</TextBlock>
+                <Slider x:Name ="SpaceObjectSpeed" Margin="5 0 0 0" Minimum="0" Maximum="800" ValueChanged="SpaceObjectSpeed_ValueChanged"/>
+                <TextBlock FontSize="14" FontWeight="Bold">Цвет планеты</TextBlock>
+                <xctk:ColorPicker Name="PlanetColorPicker" SelectedColorChanged="PlanetColorPicker_SelectedColorChanged" AvailableColorsHeader="Доступные цвета" AdvancedTabHeader="Подробнее" StandardColorsHeader="Обычные цвета" StandardTabHeader="Основное" UsingAlphaChannel="False" ShowStandardColors="False" />
+
+            </StackPanel>
+            <StackPanel x:Name="StarParams">
+                <TextBlock FontSize="14" FontWeight="Bold">Тип звезды</TextBlock>
+                <ComboBox x:Name ="StarType" Margin="5 0 0 0" SelectionChanged="StarType_SelectionChanged">
+                    <TextBlock>Голубая</TextBlock>
+                    <TextBlock>Красная</TextBlock>
+                    <TextBlock>Жёлтая</TextBlock>
+                </ComboBox>
+            </StackPanel>
         </StackPanel>
        
         <StackPanel Grid.ColumnSpan="3" Grid.Row="2" Orientation="Horizontal">
             <Button x:Name ="PlayButton" MinWidth="30" Content="4" Click="Button_Click_1" FontFamily="Webdings" />
-            <Slider x:Name ="SystemSpeed" Minimum="-10" Maximum="10" Width="400" ValueChanged="SystemSpeed_ValueChanged" />
+            <Slider x:Name ="SystemSpeed" Minimum="-5" Maximum="5" Width="400" ValueChanged="SystemSpeed_ValueChanged" />
         </StackPanel>
     </Grid>
 </Window>
