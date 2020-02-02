@@ -54,7 +54,7 @@
         <StackPanel Grid.ColumnSpan="3" Grid.Row="2" Orientation="Horizontal">
             <Button x:Name ="PlayButton" MinWidth="30" Content="4" Click="Button_Click_1" FontFamily="Webdings" />
             <Slider x:Name ="SystemSpeed" Minimum="-5" Maximum="5" Width="400" ValueChanged="SystemSpeed_ValueChanged" />
-            <Slider x:Name ="SystemSize" Minimum="0" Maximum="2" Width="300" ValueChanged="SystemSize_ValueChanged"  />
+            <Slider x:Name ="SystemSize" Minimum="0.1" Maximum="2" Width="300" ValueChanged="SystemSize_ValueChanged" Value="1"  />
         </StackPanel>
     </Grid>
 </Window>

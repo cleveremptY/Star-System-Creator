@@ -54,6 +54,7 @@ namespace StarSystem
             if (isPressed)
                 spaceEllipse.Stroke = Brushes.Red;
             spaceEllipse.StrokeThickness = 1.5;
+            spaceEllipse.Width = spaceEllipse.Height = spaceEllipse.Height * StarSystemParams.StarSystemSize;
             SetPositonCenter(spaceEllipse);
             SetActions(spaceEllipse);
             return spaceEllipse;
@@ -62,7 +63,7 @@ namespace StarSystem
         public Ellipse Draw(double resizeParam = 1)
         {
             Ellipse spaceEllipse = new Ellipse();
-            spaceEllipse.Width = spaceEllipse.Height = BaseSpaceObject.Radius * 2 * resizeParam * StarSystemParams.StarSystemSize;
+            spaceEllipse.Width = spaceEllipse.Height = BaseSpaceObject.Radius * 2 * resizeParam;
             spaceEllipse.Fill = spaceEllipse.Stroke = new SolidColorBrush(BaseSpaceObject.ObjectColor);
             spaceEllipse.StrokeThickness = 1.5;
             return spaceEllipse;
@@ -74,7 +75,7 @@ namespace StarSystem
             {
                 Ellipse orbitEllipse = new Ellipse();
                 Planet BaseSpaceObjectPlanet = (Planet)BaseSpaceObject;
-                orbitEllipse.Width = orbitEllipse.Height = BaseSpaceObjectPlanet.OrbitRadius * 2;
+                orbitEllipse.Width = orbitEllipse.Height = BaseSpaceObjectPlanet.OrbitRadius * 2 * StarSystemParams.StarSystemSize;
                 orbitEllipse.Fill = new SolidColorBrush(Color.FromArgb(0, 0, 0, 0));
                 orbitEllipse.Stroke = new SolidColorBrush(Color.FromArgb(255, 255, 0, 0));
                 orbitEllipse.StrokeThickness = 1.5;

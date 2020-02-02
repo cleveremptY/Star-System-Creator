@@ -15,7 +15,7 @@ namespace StarSystem
         {
             get
             {
-                return new Position(orbitBase.ObjectPosition.X + OrbitRadius, orbitBase.ObjectPosition.Y);
+                return new Position(orbitBase.ObjectPosition.X + OrbitRadius * StarSystemParams.StarSystemSize, orbitBase.ObjectPosition.Y);
             }
         }
 
