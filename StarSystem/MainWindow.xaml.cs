@@ -228,5 +228,11 @@ namespace StarSystem
             StarSystemParams.MainStarSystem.Resize();
             RedrawAll();
         }
+
+        private void ResetSystemButton_Click(object sender, RoutedEventArgs e)
+        {
+            SystemSize.Value = 1;
+            SystemSpeed.Value = 1;
+        }
     }
 }

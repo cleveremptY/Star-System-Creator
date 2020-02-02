@@ -6,7 +6,7 @@
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:local="clr-namespace:StarSystem"
         mc:Ignorable="d"
-        Title="Star System Creator" Height="500" Width="800" Loaded="Window_Loaded" SizeChanged="Window_SizeChanged" MinWidth="800" MinHeight="500">
+        Title="Star System Creator" Height="600" Width="800" Loaded="Window_Loaded" SizeChanged="Window_SizeChanged" MinWidth="800" MinHeight="600">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*" />
@@ -16,7 +16,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="10*"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
-            <RowDefinition Height="30px"></RowDefinition>
+            <RowDefinition Height="110px"></RowDefinition>
         </Grid.RowDefinitions>
         <Canvas x:Name ="SpaceCanvas"  Background="Black" MouseDown="SpaceCanvas_MouseDown" ClipToBounds="True">
             
@@ -38,7 +38,7 @@
                 <TextBlock FontSize="14" FontWeight="Bold">Скорость вращения</TextBlock>
                 <Slider x:Name ="SpaceObjectSpeed" Margin="5 0 0 0" Minimum="0" Maximum="800" ValueChanged="SpaceObjectSpeed_ValueChanged"/>
                 <TextBlock FontSize="14" FontWeight="Bold">Цвет планеты</TextBlock>
-                <xctk:ColorPicker Name="PlanetColorPicker" SelectedColorChanged="PlanetColorPicker_SelectedColorChanged" AvailableColorsHeader="Доступные цвета" AdvancedTabHeader="Подробнее" StandardColorsHeader="Обычные цвета" StandardTabHeader="Основное" UsingAlphaChannel="False" ShowStandardColors="False" />
+                <xctk:ColorPicker Name="PlanetColorPicker" Margin="5 0 0 0" SelectedColorChanged="PlanetColorPicker_SelectedColorChanged" AvailableColorsHeader="Доступные цвета" AdvancedTabHeader="Подробнее" StandardColorsHeader="Обычные цвета" StandardTabHeader="Основное" UsingAlphaChannel="False" ShowStandardColors="False" />
 
             </StackPanel>
             <StackPanel x:Name="StarParams">
@@ -50,11 +50,16 @@
                 </ComboBox>
             </StackPanel>
         </StackPanel>
-       
-        <StackPanel Grid.ColumnSpan="3" Grid.Row="2" Orientation="Horizontal">
-            <Button x:Name ="PlayButton" MinWidth="30" Content="4" Click="Button_Click_1" FontFamily="Webdings" />
-            <Slider x:Name ="SystemSpeed" Minimum="-5" Maximum="5" Width="400" ValueChanged="SystemSpeed_ValueChanged" />
-            <Slider x:Name ="SystemSize" Minimum="0.1" Maximum="2" Width="300" ValueChanged="SystemSize_ValueChanged" Value="1"  />
+
+        <StackPanel Grid.ColumnSpan="3" Margin="5px" Grid.Row="2" Orientation="Vertical" HorizontalAlignment="Left">
+            <StackPanel Grid.ColumnSpan="3" Grid.Row="2" Orientation="Horizontal" >
+                <Button x:Name ="PlayButton" MinWidth="40" Content="4" Click="Button_Click_1" FontFamily="Webdings" />
+                <Button x:Name ="ResetSystemButton" MinWidth="40" Content="q" FontFamily="Webdings" Click="ResetSystemButton_Click" />
+            </StackPanel>
+            <TextBlock FontSize="14" FontWeight="Bold">Скорость анимации</TextBlock>
+            <Slider x:Name ="SystemSpeed" Margin="5 0 0 0" Minimum="-5" Maximum="5" Width="400" ValueChanged="SystemSpeed_ValueChanged" />
+            <TextBlock FontSize="14" FontWeight="Bold">Уровень приблежения/отдаления</TextBlock>
+            <Slider x:Name ="SystemSize" Margin="5 0 0 0" Minimum="0.1" Maximum="2" Width="400" ValueChanged="SystemSize_ValueChanged" Value="1"  />
         </StackPanel>
     </Grid>
 </Window>
