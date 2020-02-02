@@ -6,7 +6,7 @@
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:local="clr-namespace:StarSystem"
         mc:Ignorable="d"
-        Title="Star System Creator" Height="600" Width="800" Loaded="Window_Loaded" SizeChanged="Window_SizeChanged" MinWidth="800" MinHeight="600">
+        Title="Star System Creator" Height="620" Width="800" Loaded="Window_Loaded" SizeChanged="Window_SizeChanged" MinWidth="800" MinHeight="620">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*" />
@@ -18,7 +18,7 @@
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="110px"></RowDefinition>
         </Grid.RowDefinitions>
-        <Canvas x:Name ="SpaceCanvas"  Background="Black" MouseDown="SpaceCanvas_MouseDown" ClipToBounds="True">
+        <Canvas x:Name ="SpaceCanvas"  Background="Black" MouseDown="SpaceCanvas_MouseDown" ClipToBounds="True" MouseMove="SpaceCanvas_MouseMove" MouseUp="SpaceCanvas_MouseUp">
             
         </Canvas>
         <GridSplitter Grid.Column="1" ShowsPreview="False" Width="3"
@@ -31,11 +31,14 @@
             <TextBlock FontSize="14" FontWeight="Bold">Название</TextBlock>
             <TextBox x:Name ="SpaceObjectName" Margin="5 0 0 0" Text="Виктория" TextChanged="SpaceObjectName_TextChanged"/>
             <TextBlock FontSize="14" FontWeight="Bold">Радиус</TextBlock>
+            <TextBox x:Name ="SpaceObjectRadiusText" Margin="5 0 0 0" Text="5" TextChanged="SpaceObjectRadiusText_TextChanged" PreviewTextInput="SpaceObjectParams_PreviewTextInput"/>
             <Slider x:Name ="SpaceObjectRadius" Margin="5 0 0 0" Minimum="1" Maximum="150" ValueChanged="SpaceObjectRadius_ValueChanged"/>
             <StackPanel x:Name="PlanetParams">
                 <TextBlock FontSize="14" FontWeight="Bold">Орбитальный радиус</TextBlock>
+                <TextBox x:Name ="SpaceObjectOrbitRadiusText" Margin="5 0 0 0" Text="5" TextChanged="SpaceObjectOrbitRadiusText_TextChanged" PreviewTextInput="SpaceObjectParams_PreviewTextInput"/>
                 <Slider x:Name ="SpaceObjectOrbitRadius" Margin="5 0 0 0" Minimum="1" Maximum="500" ValueChanged="SpaceObjectOrbitRadius_ValueChanged"/>
                 <TextBlock FontSize="14" FontWeight="Bold">Скорость вращения</TextBlock>
+                <TextBox x:Name ="SpaceObjectSpeedText" Margin="5 0 0 0" Text="5" TextChanged="SpaceObjectSpeedText_TextChanged" PreviewTextInput="SpaceObjectParams_PreviewTextInput"/>
                 <Slider x:Name ="SpaceObjectSpeed" Margin="5 0 0 0" Minimum="0" Maximum="800" ValueChanged="SpaceObjectSpeed_ValueChanged"/>
                 <TextBlock FontSize="14" FontWeight="Bold">Цвет планеты</TextBlock>
                 <xctk:ColorPicker Name="PlanetColorPicker" Margin="5 0 0 0" SelectedColorChanged="PlanetColorPicker_SelectedColorChanged" AvailableColorsHeader="Доступные цвета" AdvancedTabHeader="Подробнее" StandardColorsHeader="Обычные цвета" StandardTabHeader="Основное" UsingAlphaChannel="False" ShowStandardColors="False" />
@@ -53,8 +56,8 @@
 
         <StackPanel Grid.ColumnSpan="3" Margin="5px" Grid.Row="2" Orientation="Vertical" HorizontalAlignment="Left">
             <StackPanel Grid.ColumnSpan="3" Grid.Row="2" Orientation="Horizontal" >
-                <Button x:Name ="PlayButton" MinWidth="40" Content="4" Click="Button_Click_1" FontFamily="Webdings" />
-                <Button x:Name ="ResetSystemButton" MinWidth="40" Content="q" FontFamily="Webdings" Click="ResetSystemButton_Click" />
+                <Button x:Name ="PlayButton" MinWidth="40" Content="4" Click="Button_Click_1" FontFamily="Webdings" ToolTip="Начать/Остановить анимацию" />
+                <Button x:Name ="ResetSystemButton" MinWidth="40" Content="q" FontFamily="Webdings" Click="ResetSystemButton_Click" ToolTip="Установить настройки отображения по умолчанию" />
             </StackPanel>
             <TextBlock FontSize="14" FontWeight="Bold">Скорость анимации</TextBlock>
             <Slider x:Name ="SystemSpeed" Margin="5 0 0 0" Minimum="-5" Maximum="5" Width="400" ValueChanged="SystemSpeed_ValueChanged" />

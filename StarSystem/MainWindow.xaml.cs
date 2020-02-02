@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -23,7 +24,11 @@ namespace StarSystem
     {
         private Planet createPlanet;
 
+        private bool isSystemMove; //WIP
+
         DispatcherTimer timerSystem;
+
+        private static readonly Regex spaceObjectParamsRegex = new Regex("^[0-9]*[,][0-9]+$");
 
         public MainWindow()
         {
@@ -65,6 +70,8 @@ namespace StarSystem
         private void SpaceCanvas_MouseDown(object sender, MouseButtonEventArgs e)
         {
             RedrawSpaceObjectView();
+            //if (StarSystemParams.SelectedSpaceObject.Name == StarSystemParams.MainStarSystem.MainStar.BaseSpaceObject.Name)
+            //    isSystemMove = true;
         }
 
         private void PrintSelectedSpaceObjectInfo()
@@ -183,6 +190,7 @@ namespace StarSystem
             if (StarSystemParams.SelectedSpaceObject == null)
                 return;
             StarSystemParams.SelectedSpaceObject.Radius = SpaceObjectRadius.Value;
+            SpaceObjectRadiusText.Text = SpaceObjectRadius.Value.ToString();
             RedrawAll();
         }
 
@@ -191,6 +199,7 @@ namespace StarSystem
             if (StarSystemParams.SelectedSpaceObject == null || StarSystemParams.MainStarSystem.MainStar.BaseSpaceObject.Name == StarSystemParams.SelectedSpaceObject.Name)
                 return;
             ((Planet)StarSystemParams.SelectedSpaceObject).OrbitRadius = SpaceObjectOrbitRadius.Value;
+            SpaceObjectOrbitRadiusText.Text = SpaceObjectOrbitRadius.Value.ToString();
             RedrawSystem();
         }
 
@@ -199,6 +208,7 @@ namespace StarSystem
             if (StarSystemParams.SelectedSpaceObject == null || StarSystemParams.MainStarSystem.MainStar.BaseSpaceObject.Name == StarSystemParams.SelectedSpaceObject.Name)
                 return;
             ((Planet)StarSystemParams.SelectedSpaceObject).Speed = SpaceObjectSpeed.Value;
+            SpaceObjectSpeedText.Text = SpaceObjectSpeed.Value.ToString();
         }
 
         private void SystemSpeed_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
@@ -233,6 +243,68 @@ namespace StarSystem
         {
             SystemSize.Value = 1;
             SystemSpeed.Value = 1;
+        }
+
+        private void SpaceObjectRadiusText_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (StarSystemParams.SelectedSpaceObject == null)
+                return;
+            if (Convert.ToDouble(SpaceObjectRadiusText.Text) >= SpaceObjectRadius.Minimum &&
+                Convert.ToDouble(SpaceObjectRadiusText.Text) <= SpaceObjectRadius.Maximum)
+            {
+                SpaceObjectRadiusText.Foreground = Brushes.Black;
+                SpaceObjectRadius.Value = Convert.ToDouble(SpaceObjectRadiusText.Text);
+            }
+            else
+                SpaceObjectRadiusText.Foreground = Brushes.Red;
+        }
+
+        private void SpaceObjectOrbitRadiusText_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (StarSystemParams.SelectedSpaceObject == null)
+                return;
+            if (Convert.ToDouble(SpaceObjectOrbitRadiusText.Text) >= SpaceObjectOrbitRadius.Minimum &&
+                Convert.ToDouble(SpaceObjectOrbitRadiusText.Text) <= SpaceObjectOrbitRadius.Maximum)
+            {
+                SpaceObjectOrbitRadiusText.Foreground = Brushes.Black;
+                SpaceObjectOrbitRadius.Value = Convert.ToDouble(SpaceObjectOrbitRadiusText.Text);
+            }
+            else
+                SpaceObjectOrbitRadiusText.Foreground = Brushes.Red;
+        }
+
+        private void SpaceObjectSpeedText_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (StarSystemParams.SelectedSpaceObject == null)
+                return;
+            if (Convert.ToDouble(SpaceObjectSpeedText.Text) >= SpaceObjectSpeed.Minimum &&
+                Convert.ToDouble(SpaceObjectSpeedText.Text) <= SpaceObjectSpeed.Maximum)
+            {
+                SpaceObjectSpeedText.Foreground = Brushes.Black;
+                SpaceObjectSpeed.Value = Convert.ToDouble(SpaceObjectSpeedText.Text);
+            }
+            else
+                SpaceObjectSpeedText.Foreground = Brushes.Red;
+        }
+
+        private void SpaceObjectParams_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = spaceObjectParamsRegex.IsMatch(e.Text);
+        }
+
+        private void SpaceCanvas_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (isSystemMove)
+            {
+                Canvas.SetLeft(StarSystemParams.MainStarSystem.MainStar.EllipseSpaceObject, e.GetPosition(null).X);
+                Canvas.SetTop(StarSystemParams.MainStarSystem.MainStar.EllipseSpaceObject, e.GetPosition(null).Y);
+                RedrawSystem();
+            }
+        }
+
+        private void SpaceCanvas_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            isSystemMove = false;
         }
     }
 }
