@@ -22,6 +22,8 @@ namespace StarSystem
     /// </summary>
     public partial class MainWindow : Window
     {
+        private const int roundParam = 2;
+
         private Planet createPlanet;
 
         private bool isSystemMove; //WIP
@@ -189,6 +191,7 @@ namespace StarSystem
         {
             if (StarSystemParams.SelectedSpaceObject == null)
                 return;
+            SpaceObjectRadius.Value = Math.Round(SpaceObjectRadius.Value, roundParam);
             StarSystemParams.SelectedSpaceObject.Radius = SpaceObjectRadius.Value;
             SpaceObjectRadiusText.Text = SpaceObjectRadius.Value.ToString();
             RedrawAll();
@@ -198,6 +201,7 @@ namespace StarSystem
         {
             if (StarSystemParams.SelectedSpaceObject == null || StarSystemParams.MainStarSystem.MainStar.BaseSpaceObject.Name == StarSystemParams.SelectedSpaceObject.Name)
                 return;
+            SpaceObjectOrbitRadius.Value = Math.Round(SpaceObjectOrbitRadius.Value, roundParam);
             ((Planet)StarSystemParams.SelectedSpaceObject).OrbitRadius = SpaceObjectOrbitRadius.Value;
             SpaceObjectOrbitRadiusText.Text = SpaceObjectOrbitRadius.Value.ToString();
             RedrawSystem();
@@ -207,6 +211,7 @@ namespace StarSystem
         {
             if (StarSystemParams.SelectedSpaceObject == null || StarSystemParams.MainStarSystem.MainStar.BaseSpaceObject.Name == StarSystemParams.SelectedSpaceObject.Name)
                 return;
+            SpaceObjectSpeed.Value = Math.Round(SpaceObjectSpeed.Value, roundParam);
             ((Planet)StarSystemParams.SelectedSpaceObject).Speed = SpaceObjectSpeed.Value;
             SpaceObjectSpeedText.Text = SpaceObjectSpeed.Value.ToString();
         }
@@ -249,6 +254,7 @@ namespace StarSystem
         {
             if (StarSystemParams.SelectedSpaceObject == null)
                 return;
+            SpaceRemove(SpaceObjectRadiusText);
             if (Convert.ToDouble(SpaceObjectRadiusText.Text) >= SpaceObjectRadius.Minimum &&
                 Convert.ToDouble(SpaceObjectRadiusText.Text) <= SpaceObjectRadius.Maximum)
             {
@@ -263,6 +269,7 @@ namespace StarSystem
         {
             if (StarSystemParams.SelectedSpaceObject == null)
                 return;
+            SpaceRemove(SpaceObjectOrbitRadiusText);
             if (Convert.ToDouble(SpaceObjectOrbitRadiusText.Text) >= SpaceObjectOrbitRadius.Minimum &&
                 Convert.ToDouble(SpaceObjectOrbitRadiusText.Text) <= SpaceObjectOrbitRadius.Maximum)
             {
@@ -277,6 +284,7 @@ namespace StarSystem
         {
             if (StarSystemParams.SelectedSpaceObject == null)
                 return;
+            SpaceRemove(SpaceObjectSpeedText);
             if (Convert.ToDouble(SpaceObjectSpeedText.Text) >= SpaceObjectSpeed.Minimum &&
                 Convert.ToDouble(SpaceObjectSpeedText.Text) <= SpaceObjectSpeed.Maximum)
             {
@@ -290,6 +298,13 @@ namespace StarSystem
         private void SpaceObjectParams_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             e.Handled = spaceObjectParamsRegex.IsMatch(e.Text);
+        }
+
+        private static void SpaceRemove(TextBox textBox)
+        {
+            textBox.Text = textBox.Text.Replace(" ", "");
+            if (textBox.Text == "")
+                textBox.Text = "0";
         }
 
         private void SpaceCanvas_MouseMove(object sender, MouseEventArgs e)
