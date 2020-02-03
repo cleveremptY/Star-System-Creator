@@ -254,47 +254,32 @@ namespace StarSystem
 
         private void SpaceObjectRadiusText_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (StarSystemParams.SelectedSpaceObject == null)
-                return;
-            SpaceRemove(SpaceObjectRadiusText);
-            if (Convert.ToDouble(SpaceObjectRadiusText.Text) >= SpaceObjectRadius.Minimum &&
-                Convert.ToDouble(SpaceObjectRadiusText.Text) <= SpaceObjectRadius.Maximum)
-            {
-                SpaceObjectRadiusText.Foreground = Brushes.Black;
-                SpaceObjectRadius.Value = Convert.ToDouble(SpaceObjectRadiusText.Text);
-            }
-            else
-                SpaceObjectRadiusText.Foreground = Brushes.Red;
+            ChangeParamOnText(SpaceObjectRadiusText, SpaceObjectRadius);
         }
 
         private void SpaceObjectOrbitRadiusText_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (StarSystemParams.SelectedSpaceObject == null)
-                return;
-            SpaceRemove(SpaceObjectOrbitRadiusText);
-            if (Convert.ToDouble(SpaceObjectOrbitRadiusText.Text) >= SpaceObjectOrbitRadius.Minimum &&
-                Convert.ToDouble(SpaceObjectOrbitRadiusText.Text) <= SpaceObjectOrbitRadius.Maximum)
-            {
-                SpaceObjectOrbitRadiusText.Foreground = Brushes.Black;
-                SpaceObjectOrbitRadius.Value = Convert.ToDouble(SpaceObjectOrbitRadiusText.Text);
-            }
-            else
-                SpaceObjectOrbitRadiusText.Foreground = Brushes.Red;
+            ChangeParamOnText(SpaceObjectOrbitRadiusText, SpaceObjectOrbitRadius);
         }
 
         private void SpaceObjectSpeedText_TextChanged(object sender, TextChangedEventArgs e)
         {
+            ChangeParamOnText(SpaceObjectSpeedText, SpaceObjectSpeed);
+        }
+
+        private void ChangeParamOnText(TextBox textBoxParam, Slider sliderParam)
+        {
             if (StarSystemParams.SelectedSpaceObject == null)
                 return;
-            SpaceRemove(SpaceObjectSpeedText);
-            if (Convert.ToDouble(SpaceObjectSpeedText.Text) >= SpaceObjectSpeed.Minimum &&
-                Convert.ToDouble(SpaceObjectSpeedText.Text) <= SpaceObjectSpeed.Maximum)
+            SpaceRemove(textBoxParam);
+            if (Convert.ToDouble(textBoxParam.Text) >= sliderParam.Minimum &&
+                Convert.ToDouble(textBoxParam.Text) <= sliderParam.Maximum)
             {
-                SpaceObjectSpeedText.Foreground = Brushes.Black;
-                SpaceObjectSpeed.Value = Convert.ToDouble(SpaceObjectSpeedText.Text);
+                textBoxParam.Foreground = Brushes.Black;
+                sliderParam.Value = Convert.ToDouble(textBoxParam.Text);
             }
             else
-                SpaceObjectSpeedText.Foreground = Brushes.Red;
+                textBoxParam.Foreground = Brushes.Red;
         }
 
         private void SpaceObjectParams_PreviewTextInput(object sender, TextCompositionEventArgs e)
@@ -305,6 +290,7 @@ namespace StarSystem
         private static void SpaceRemove(TextBox textBox)
         {
             textBox.Text = textBox.Text.Replace(" ", "");
+            textBox.Text = textBox.Text.Replace(".", ",");
             if (textBox.Text == "")
                 textBox.Text = "0";
         }
