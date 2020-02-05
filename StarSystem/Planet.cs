@@ -58,7 +58,8 @@ namespace StarSystem
             double Y = Center.Y + (ObjectPosition.Y - Center.Y) * Math.Cos(Angle * Speed * StarSystemParams.StarSystemSpeed) + (ObjectPosition.X - Center.X) * Math.Sin(Angle * Speed * StarSystemParams.StarSystemSpeed);
 
             ObjectPosition = new Position(X, Y);
-            MoveOnRadiusChange();
+            if (orbitBase is Planet)
+                MoveOnRadiusChange();
         }
 
         private void MoveOnRadiusChange()
