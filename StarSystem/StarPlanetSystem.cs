@@ -42,12 +42,7 @@ namespace StarSystem
 
         public SpaceObjectCanvasAdapter FindSpaceObject(string name)
         {
-            if (MainStar.BaseSpaceObject.Name == name)
-                return MainStar;
-            foreach (var planet in Planets)
-                if (planet.BaseSpaceObject.Name == name)
-                    return planet;
-            return null;
+            return AllSpaceObjects.FirstOrDefault((c) => c.BaseSpaceObject.Name == name);
         }
 
         public void Resize()
