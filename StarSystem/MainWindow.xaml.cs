@@ -91,7 +91,7 @@ namespace StarSystem
                     SpaceObjectSpeed.Value =
                         ((Planet)StarSystemParams.MainStarSystem.FindSpaceObject(StarSystemParams.SelectedSpaceObject.Name).BaseSpaceObject).Speed;
                     PlanetColorPicker.SelectedColor = StarSystemParams.MainStarSystem.FindSpaceObject(StarSystemParams.SelectedSpaceObject.Name).BaseSpaceObject.ObjectColor;
-                    AddSpaceObject.Visibility = Visibility.Hidden;
+                    //AddSpaceObject.Visibility = Visibility.Hidden;
                 }
                 else
                 {
