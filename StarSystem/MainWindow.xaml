@@ -7,6 +7,15 @@
         xmlns:local="clr-namespace:StarSystem"
         mc:Ignorable="d"
         Title="Star System Creator" Height="620" Width="800" Loaded="Window_Loaded" SizeChanged="Window_SizeChanged" MinWidth="800" MinHeight="620">
+    <Window.Resources>
+        <Style x:Key="ParamLabel">
+            <Setter Property="Control.FontSize" Value="14" />
+            <Setter Property="Control.FontWeight" Value="Bold" />
+        </Style>
+        <Style x:Key="ParamBase">
+            <Setter Property="Control.Margin" Value="5 0 0 0" />
+        </Style>
+    </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*" />
@@ -28,25 +37,25 @@
 
             </Canvas>
             <Button x:Name="AddSpaceObject" Content="Добавить тело на орбиту" Click="Button_Click" />
-            <TextBlock FontSize="14" FontWeight="Bold">Название</TextBlock>
-            <TextBox x:Name ="SpaceObjectName" Margin="5 0 0 0" Text="Виктория" TextChanged="SpaceObjectName_TextChanged"/>
-            <TextBlock FontSize="14" FontWeight="Bold">Радиус</TextBlock>
-            <TextBox x:Name ="SpaceObjectRadiusText" Margin="5 0 0 0" Text="5" TextChanged="SpaceObjectRadiusText_TextChanged" PreviewTextInput="SpaceObjectParams_PreviewTextInput"/>
-            <Slider x:Name ="SpaceObjectRadius" Margin="5 0 0 0" Minimum="1" Maximum="150" ValueChanged="SpaceObjectRadius_ValueChanged"/>
+            <TextBlock Style="{StaticResource ParamLabel}">Название</TextBlock>
+            <TextBox x:Name ="SpaceObjectName" Style="{StaticResource ParamBase}" Text="Виктория" TextChanged="SpaceObjectName_TextChanged"/>
+            <TextBlock Style="{StaticResource ParamLabel}">Радиус</TextBlock>
+            <TextBox x:Name ="SpaceObjectRadiusText" Style="{StaticResource ParamBase}" Text="5" TextChanged="SpaceObjectRadiusText_TextChanged" PreviewTextInput="SpaceObjectParams_PreviewTextInput"/>
+            <Slider x:Name ="SpaceObjectRadius" Style="{StaticResource ParamBase}" Minimum="1" Maximum="150" ValueChanged="SpaceObjectRadius_ValueChanged"/>
             <StackPanel x:Name="PlanetParams">
-                <TextBlock FontSize="14" FontWeight="Bold">Орбитальный радиус</TextBlock>
-                <TextBox x:Name ="SpaceObjectOrbitRadiusText" Margin="5 0 0 0" Text="5" TextChanged="SpaceObjectOrbitRadiusText_TextChanged" PreviewTextInput="SpaceObjectParams_PreviewTextInput"/>
-                <Slider x:Name ="SpaceObjectOrbitRadius" Margin="5 0 0 0" Minimum="1" Maximum="500" ValueChanged="SpaceObjectOrbitRadius_ValueChanged"/>
-                <TextBlock FontSize="14" FontWeight="Bold">Скорость вращения</TextBlock>
-                <TextBox x:Name ="SpaceObjectSpeedText" Margin="5 0 0 0" Text="5" TextChanged="SpaceObjectSpeedText_TextChanged" PreviewTextInput="SpaceObjectParams_PreviewTextInput"/>
-                <Slider x:Name ="SpaceObjectSpeed" Margin="5 0 0 0" Minimum="0" Maximum="800" ValueChanged="SpaceObjectSpeed_ValueChanged"/>
-                <TextBlock FontSize="14" FontWeight="Bold">Цвет планеты</TextBlock>
-                <xctk:ColorPicker Name="PlanetColorPicker" Margin="5 0 0 0" SelectedColorChanged="PlanetColorPicker_SelectedColorChanged" AvailableColorsHeader="Доступные цвета" AdvancedTabHeader="Подробнее" StandardColorsHeader="Обычные цвета" StandardTabHeader="Основное" UsingAlphaChannel="False" ShowStandardColors="False" />
+                <TextBlock Style="{StaticResource ParamLabel}">Орбитальный радиус</TextBlock>
+                <TextBox x:Name ="SpaceObjectOrbitRadiusText" Style="{StaticResource ParamBase}" Text="5" TextChanged="SpaceObjectOrbitRadiusText_TextChanged" PreviewTextInput="SpaceObjectParams_PreviewTextInput"/>
+                <Slider x:Name ="SpaceObjectOrbitRadius" Style="{StaticResource ParamBase}" Minimum="1" Maximum="500" ValueChanged="SpaceObjectOrbitRadius_ValueChanged"/>
+                <TextBlock Style="{StaticResource ParamLabel}">Скорость вращения</TextBlock>
+                <TextBox x:Name ="SpaceObjectSpeedText" Style="{StaticResource ParamBase}" Text="5" TextChanged="SpaceObjectSpeedText_TextChanged" PreviewTextInput="SpaceObjectParams_PreviewTextInput"/>
+                <Slider x:Name ="SpaceObjectSpeed" Style="{StaticResource ParamBase}" Minimum="0" Maximum="800" ValueChanged="SpaceObjectSpeed_ValueChanged"/>
+                <TextBlock Style="{StaticResource ParamLabel}">Цвет планеты</TextBlock>
+                <xctk:ColorPicker Name="PlanetColorPicker" Style="{StaticResource ParamBase}" SelectedColorChanged="PlanetColorPicker_SelectedColorChanged" AvailableColorsHeader="Доступные цвета" AdvancedTabHeader="Подробнее" StandardColorsHeader="Обычные цвета" StandardTabHeader="Основное" UsingAlphaChannel="False" ShowStandardColors="False" />
 
             </StackPanel>
             <StackPanel x:Name="StarParams">
-                <TextBlock FontSize="14" FontWeight="Bold">Тип звезды</TextBlock>
-                <ComboBox x:Name ="StarType" Margin="5 0 0 0" SelectionChanged="StarType_SelectionChanged">
+                <TextBlock Style="{StaticResource ParamLabel}">Тип звезды</TextBlock>
+                <ComboBox x:Name ="StarType" Style="{StaticResource ParamBase}" SelectionChanged="StarType_SelectionChanged">
                     <TextBlock>Голубая</TextBlock>
                     <TextBlock>Красная</TextBlock>
                     <TextBlock>Жёлтая</TextBlock>
@@ -59,10 +68,10 @@
                 <Button x:Name ="PlayButton" MinWidth="40" Content="4" Click="Button_Click_1" FontFamily="Webdings" ToolTip="Начать/Остановить анимацию" />
                 <Button x:Name ="ResetSystemButton" MinWidth="40" Content="q" FontFamily="Webdings" Click="ResetSystemButton_Click" ToolTip="Установить настройки отображения по умолчанию" />
             </StackPanel>
-            <TextBlock FontSize="14" FontWeight="Bold">Скорость анимации</TextBlock>
-            <Slider x:Name ="SystemSpeed" Margin="5 0 0 0" Minimum="-5" Maximum="5" Width="400" ValueChanged="SystemSpeed_ValueChanged" />
-            <TextBlock FontSize="14" FontWeight="Bold">Уровень приблежения/отдаления</TextBlock>
-            <Slider x:Name ="SystemSize" Margin="5 0 0 0" Minimum="0.1" Maximum="2" Width="400" ValueChanged="SystemSize_ValueChanged" Value="1"  />
+            <TextBlock Style="{StaticResource ParamLabel}">Скорость анимации</TextBlock>
+            <Slider x:Name ="SystemSpeed" Style="{StaticResource ParamBase}" Minimum="-5" Maximum="5" Width="400" ValueChanged="SystemSpeed_ValueChanged" />
+            <TextBlock Style="{StaticResource ParamLabel}">Уровень приблежения/отдаления</TextBlock>
+            <Slider x:Name ="SystemSize" Style="{StaticResource ParamBase}" Minimum="0.1" Maximum="2" Width="400" ValueChanged="SystemSize_ValueChanged" Value="1"  />
         </StackPanel>
     </Grid>
 </Window>
